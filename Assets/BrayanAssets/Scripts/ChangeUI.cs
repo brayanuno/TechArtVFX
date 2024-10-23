@@ -19,12 +19,10 @@ public class ChangeUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.X))
         {
-
-
-            img.material.SetTexture("_MainTex", Texture);
+            //img.material.SetTexture("_MainTex", Texture);
             img.SetMaterialDirty();
 
-            Debug.Log("wORKING");
+            
         }
     }
 }

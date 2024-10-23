@@ -23,8 +23,16 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _MainText:
+        m_Texture: {fileID: 2800000, guid: 5cc7fed46df853d42a5e02746ebe1450, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTexture:
+        m_Texture: {fileID: 2800000, guid: 5cc7fed46df853d42a5e02746ebe1450, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _NoiseTexture:
-        m_Texture: {fileID: 2800000, guid: 4ec8b94a565afda4288914e29c38d322, type: 3}
+        m_Texture: {fileID: 2800000, guid: d2d1595d5ead6b84baa71d7bd11aa32d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureDiffuse:
@@ -48,7 +56,7 @@ Material:
     - _DiffusePower: 1.21
     - _Float: 0
     - _MaskContrast: 1
-    - _NoiseIntensity: 0.78
+    - _NoiseIntensity: 0.72672814
     - _UsePolar: 1
     m_Colors:
     - _ColorOutiner: {r: 1240.7018, g: 347.24033, b: 1179.5703, a: 0}
