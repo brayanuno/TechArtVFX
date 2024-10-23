@@ -6,7 +6,7 @@ public class Animateui : MonoBehaviour
 {
     public AnimationCurve curve;
     private Image img;
-    public float animDuration;
+    public float animationDuration; //seconds 
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,29 +22,26 @@ public class Animateui : MonoBehaviour
         {
 
             StartCoroutine(AnimProperty());
-
-            
-            //img.material.SetTexture("_NoiseIntensity", Curve);
-            //img.SetMaterialDirty();
-            //Debug.Log("wORKING");
         }
 
         
     }
     private IEnumerator AnimProperty ()
     {
-        float time = 0;
+        float timer = 0;
 
-        while (time < animDuration) {
-            float rate = animDuration / 60;
-            time = time + Time.deltaTime * rate ;
+        while (timer < animationDuration) {
 
-         
-            float value = curve.Evaluate(time );
+            float someValueFrom0To1 = timer / animationDuration;
+
+            timer += Time.deltaTime;
+
+            float value = curve.Evaluate(someValueFrom0To1);
 
             img.material.SetFloat("_NoiseIntensity", value);
+            Debug.Log(someValueFrom0To1);
             Debug.Log(value);
-            Debug.Log(time);
+           
             yield return null;
         }
     }
