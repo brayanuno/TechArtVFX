@@ -22,9 +22,10 @@ public class ProjectileSpawn : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             SpawnProjectile();
-            Debug.Log("Spawned");
+          
         }
 
+        
 
     }
 
@@ -33,11 +34,15 @@ public class ProjectileSpawn : MonoBehaviour
         if (ProjectileToSpawn != null)
         {
             GameObject clone = Instantiate(ProjectileToSpawn, ProjectileSpawnedLocation.transform.position, Quaternion.identity);
-            clone.GetComponent<Rigidbody>().linearVelocity = gameObject.transform.forward * projectileSpeed;
+            clone.GetComponent<Rigidbody>().linearVelocity = ProjectileSpawnedLocation.transform.forward * projectileSpeed;
+
         }
-
-
         
+    }
+
+    void MoveObject()
+    {
+
     }
 }
     

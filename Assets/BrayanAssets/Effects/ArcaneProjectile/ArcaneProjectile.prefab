@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 370840003177215172}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.72, y: 0, z: -0}
+  m_LocalPosition: {x: 8.24, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -116,7 +116,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.04
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -168,29 +168,29 @@ ParticleSystem:
         m_RotationOrder: 4
     startSpeed:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 10
+      minMaxState: 1
+      scalar: 20
       minScalar: 5
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 0
-          outSlope: 0
+          time: 0.0024909973
+          value: 0.99095726
+          inSlope: 0.027100775
+          outSlope: 0.027100775
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.33333334
+          outWeight: 0.0836988
         - serializedVersion: 3
           time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
+          value: 0.46214437
+          inSlope: -0.5382421
+          outSlope: -0.5382421
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0.0968144
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -3998,7 +3998,7 @@ ParticleSystem:
     lifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.7
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4049,14 +4049,14 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     minVertexDistance: 5.02
-    textureMode: 0
-    textureScale: {x: 1, y: 1}
+    textureMode: 1
+    textureScale: {x: 0.06, y: 1}
     ribbonCount: 1
     shadowBias: 0.5
     worldSpace: 0
     dieWithParticles: 1
     sizeAffectsWidth: 1
-    sizeAffectsLifetime: 0
+    sizeAffectsLifetime: 1
     inheritParticleColor: 1
     generateLightingData: 0
     splitSubEmitterRibbons: 0
@@ -4135,31 +4135,31 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0.0024909973
-          value: 0.91412354
-          inSlope: -0.14552373
-          outSlope: -0.14552373
+          time: 0
+          value: 0.9593277
+          inSlope: -0.084639065
+          outSlope: -0.084639065
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.15495154
+          outWeight: 0.1369248
         - serializedVersion: 3
-          time: 0.6825493
-          value: 0.6445133
-          inSlope: -0.89051646
-          outSlope: -0.89051646
+          time: 0.62771463
+          value: 0.8366005
+          inSlope: -0.5213031
+          outSlope: -0.5213031
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.109350294
-          outWeight: 0.22321221
+          outWeight: 0.2383342
         - serializedVersion: 3
           time: 0.99505615
           value: 0.09034729
-          inSlope: -2.1411319
-          outSlope: -2.1411319
+          inSlope: -3.1655176
+          outSlope: -3.1655176
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.34837633
+          inWeight: 0.12053478
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -4212,7 +4212,7 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 19468
+        atime1: 1542
         atime2: 52428
         atime3: 65535
         atime4: 65535
@@ -5027,6 +5027,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 496548359081250767}
+  - component: {fileID: 8572209739345993338}
   m_Layer: 0
   m_Name: ArcaneProjectile
   m_TagString: Untagged
@@ -5051,3 +5052,30 @@ Transform:
   - {fileID: 5842109505017865838}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &8572209739345993338
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6037298700289185476}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
