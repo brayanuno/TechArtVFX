@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2820689579050680591
+--- !u!114 &-3791699365759829908
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Glows
-  m_Shader: {fileID: -6465566751694194690, guid: ba03fcba0d25dde44bf204e8d5d10ba9, type: 3}
+  m_Name: M_BasicGlow
+  m_Shader: {fileID: -6465566751694194690, guid: b21bae6f9e09602489f2a4b5eff4b385, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -31,33 +31,12 @@ Material:
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses:
-  - MOTIONVECTORS
+  disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _DetailTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Gradient:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTexture:
-        m_Texture: {fileID: 2800000, guid: a6d5a65bc62d87544b02e07d8dd4a8c1, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NoiseTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_803c74ebcb834eee8006acbf7c1f74a8_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 881a7dee2d695b84db728b6a424007a1, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_e1d98b8c20fd49488ffddb219c1a5f96_Texture_1_Texture2D:
+    - _DiffuseTexture:
         m_Texture: {fileID: 2800000, guid: a6d5a65bc62d87544b02e07d8dd4a8c1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -75,16 +54,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ColorContrast: 0.98
-    - _Emmisive: 20.39
-    - _MaskPower: 1
-    - _NoiseDistortion: 0.14
-    - _QueueControl: 0
-    - _QueueOffset: 0
-    - _Rotation: 0
-    m_Colors:
-    - _Color: {r: 20.731016, g: 3.673307, b: 77.87432, a: 0}
-    - _MainSpeed: {r: 0, g: 0, b: 0, a: 0}
-    - _NoiseSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _ColorContrast: 1
+    - _EmmisiveIntensity: 500
+    - _GlowIntensity: 84.8
+    - _OpacityContrast: 1
+    m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1
