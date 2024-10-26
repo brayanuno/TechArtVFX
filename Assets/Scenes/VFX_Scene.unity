@@ -1022,7 +1022,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &188196096
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6575,7 +6575,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 300}
+  m_SizeDelta: {x: 400, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &381866674
 MonoBehaviour:
@@ -6622,8 +6622,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 381866677}
-        m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
-        m_MethodName: Play
+        m_TargetAssemblyTypeName: SpawnEffect, Assembly-CSharp
+        m_MethodName: buttonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6680,34 +6680,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 381866672}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55cb4b5a9c10edf47b3cc0a9a12dc3ef, type: 3}
+  m_Script: {fileID: 11500000, guid: 4dfcb4a8f19b1b8428ae89109e0f9613, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: -0.008331982
-      value: 0
-      inSlope: 0.12770395
-      outSlope: 0.12770395
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.45178992
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0.3983228
-      outSlope: 0.3983228
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.1487605
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  animationDuration: 0
+  effectShining: {fileID: 6714394650360591526, guid: cd61b817380d4584b8ce9eaa4e5fcb83, type: 3}
+  effectButtonPressed: {fileID: 8321110801818694987, guid: ab6e0c9ab506f2144bcaa3b24f9c4449, type: 3}
+  elapsedTime: 0.5
 --- !u!1001 &388151295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13130,7 +13108,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &761380109
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13938,7 +13916,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &969878499
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20725,7 +20703,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1503594720
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27063,7 +27041,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1947566211
 RectTransform:
   m_ObjectHideFlags: 0

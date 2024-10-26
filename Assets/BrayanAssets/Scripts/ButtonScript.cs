@@ -1,34 +1,49 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
 
+
 public class ButtonScript : MonoBehaviour
 {
-
+    
+  
     public AnimationCurve curve;
     public float animationDuration;
     private Image img;
-    private string PropertyName;
+    public string PropertyName;
+
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        img = GetComponent<Image>();
+
         PropertyName = "_" + PropertyName;
+        
+        StarAnimation();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
 
-            StartCoroutine(AnimProperty());
-        }
     }
-    private IEnumerator AnimProperty()
+
+
+    private void StarAnimation()
     {
+        
+        StartCoroutine(AnimProperty());
+        //StartCoroutine(ExecuteAfterTime(animationDuration));
+    }
+
+    private IEnumerator AnimProperty()
+    {   
+
         float timer = 0;
 
         while (timer < animationDuration)
@@ -40,11 +55,30 @@ public class ButtonScript : MonoBehaviour
 
             float value = curve.Evaluate(someValueFrom0To1);
 
-            img.material.SetFloat(PropertyName, value);
-            Debug.Log(someValueFrom0To1);
-            Debug.Log(value);
+            Material mat = new Material(GetComponent<Image>().material);
 
+            
+            this.GetComponent<Image>().material = mat;
+            this.GetComponent<Image>().material.SetFloat(PropertyName, value);
+            
+
+            
             yield return null;
+        } 
+
+        if (gameObject) {
+            if (timer >= animationDuration)
+            {
+                Destroy(gameObject);
+            }
         }
+        
     }
+    //IEnumerator ExecuteAfterTime(float time)
+    //{
+    //    yield return new WaitForSeconds(time);
+    //    Debug.Log(time);
+    //    //Destroy(gameObject);
+    //}
+
 }
