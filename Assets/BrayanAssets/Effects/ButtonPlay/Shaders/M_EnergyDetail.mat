@@ -40,10 +40,10 @@ Material:
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: ba83cc8f3aa416449bb541dfd61e01f8, type: 3}
         m_Scale: {x: 4, y: 1}
-        m_Offset: {x: 0, y: -2.09}
+        m_Offset: {x: 0, y: -2.08}
     - _NoiseTex:
         m_Texture: {fileID: 2800000, guid: a897acd764ee27c46a7c3d9f02374601, type: 3}
-        m_Scale: {x: 5, y: 1}
+        m_Scale: {x: 3, y: 0.7}
         m_Offset: {x: 0, y: 0}
     - _OpacityTexture:
         m_Texture: {fileID: 2800000, guid: a1632453b3a108a4f9f56938ccb2d370, type: 3}
@@ -79,6 +79,7 @@ Material:
     - _ColorPower: 1
     - _NoiseIntensity: 0
     - _OpaContrast: 3
+    - _OpaTextureContrast: 1
     - _OpacityPower: 1
     - _QueueControl: 0
     - _QueueOffset: 0

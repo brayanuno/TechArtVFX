@@ -6,16 +6,19 @@ public class SpawnEffect : MonoBehaviour
     public GameObject effectShining;
     public GameObject effectButtonPressed;
 
+    public GameObject childLooping;
+
+
     [Range(.5f, 10f)]
     public float elapsedTime;
 
     private float timePassed = 0f ;
 
-    private GameObject childLooping ;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameObject childLooping = transform.Find("LoopingEffect").gameObject;
+        //GameObject childLooping = transform.Find("LoopingEffect").gameObject;
 
     }
 
@@ -46,9 +49,10 @@ public class SpawnEffect : MonoBehaviour
         
         Instantiate(effectButtonPressed, this.transform);
         childLooping.transform.SetAsLastSibling();
+
         effectButtonPressed.transform.SetAsFirstSibling();
 
-        GameObject copyEffect = Instantiate(effectShining, this.transform);
+        //GameObject copyEffect = Instantiate(effectShining, this.transform);
     }
 
 
