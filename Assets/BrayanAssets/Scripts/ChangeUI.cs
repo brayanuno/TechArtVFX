@@ -22,7 +22,7 @@ public class ChangeUI : MonoBehaviour
             //img.material.SetTexture("_MainTex", Texture);
             img.SetMaterialDirty();
 
-            
+
         }
     }
 }

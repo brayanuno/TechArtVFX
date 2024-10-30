@@ -24,12 +24,20 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainText:
+        m_Texture: {fileID: 2800000, guid: 747cfd231243b7f43b0e98e964f9d596, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_0b25378de945486c8dbead80d99350b8_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: e926b5b5863f75840ab611d76da93909, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _T_Trail:
-        m_Texture: {fileID: 2800000, guid: e926b5b5863f75840ab611d76da93909, type: 3}
+        m_Texture: {fileID: 2800000, guid: d674f7fc7648b5e49b019a27dbbbd42f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -47,12 +55,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _ColorContrast: 1
-    - _EmmisiveIntensity: 4.16
+    - _EmmisiveIntensity: 8
+    - _OpaMultiplier: 1.01
     - _OpacityContrast: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _TextureSpeed: {r: 1.07, g: 0, b: 0, a: 0}
+    - _TextureSpeed: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &27176960743066698

@@ -55,12 +55,14 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
+    - _FresnelControl: 5.13
     - _FrontFresnelFront: 2.19
     - _HoleThickness: 4.19
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
     - _ErosionSpeed: {r: 0.4, g: 0, b: 0, a: 0}
+    - _FresnelColor: {r: 22.48061, g: 178.90817, b: 116.632996, a: 0}
     - _FrontColor: {r: 0.1836627, g: 18.459473, b: 19.468569, a: 0}
     - _MainColor: {r: 0.073817596, g: 2.6082375, b: 1.520162, a: 0}
   m_BuildTextureStacks: []

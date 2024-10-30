@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class SpawnEffect : MonoBehaviour
 {
@@ -12,8 +11,7 @@ public class SpawnEffect : MonoBehaviour
     [Range(.5f, 10f)]
     public float elapsedTime;
 
-    private float timePassed = 0f ;
-
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,17 +22,17 @@ public class SpawnEffect : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {
         //Looping
         //timePassed += Time.deltaTime;
         //if (timePassed > elapsedTime)
         //{
         //    //do something
         //    LoopingEffect(effectShining);
-          
+
         //    timePassed = 0f;
         //}
-        
+
     }
 
     private void LoopingEffect(GameObject effect)
@@ -42,11 +40,11 @@ public class SpawnEffect : MonoBehaviour
         GameObject copyEffect = Instantiate(effectShining, this.transform);
     }
 
-    public void buttonPressed ()
+    public void buttonPressed()
     {
         Debug.Log("clicked");
 
-        
+
         Instantiate(effectButtonPressed, this.transform);
         childLooping.transform.SetAsLastSibling();
 

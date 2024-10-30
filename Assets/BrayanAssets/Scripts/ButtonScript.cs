@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,8 +6,8 @@ using UnityEngine.UI;
 
 public class ButtonScript : MonoBehaviour
 {
-    
-  
+
+
     public AnimationCurve curve;
     public float animationDuration;
     private Image img;
@@ -22,9 +21,9 @@ public class ButtonScript : MonoBehaviour
     {
 
         PropertyName = "_" + PropertyName;
-        
+
         StarAnimation();
-        
+
     }
 
     // Update is called once per frame
@@ -36,13 +35,13 @@ public class ButtonScript : MonoBehaviour
 
     private void StarAnimation()
     {
-        
+
         StartCoroutine(AnimProperty());
         //StartCoroutine(ExecuteAfterTime(animationDuration));
     }
 
     private IEnumerator AnimProperty()
-    {   
+    {
 
         float timer = 0;
 
@@ -57,22 +56,23 @@ public class ButtonScript : MonoBehaviour
 
             Material mat = new Material(GetComponent<Image>().material);
 
-            
+
             this.GetComponent<Image>().material = mat;
             this.GetComponent<Image>().material.SetFloat(PropertyName, value);
-            
 
-            
+
+
             yield return null;
-        } 
+        }
 
-        if (gameObject) {
+        if (gameObject)
+        {
             if (timer >= animationDuration)
             {
                 Destroy(gameObject);
             }
         }
-        
+
     }
     //IEnumerator ExecuteAfterTime(float time)
     //{

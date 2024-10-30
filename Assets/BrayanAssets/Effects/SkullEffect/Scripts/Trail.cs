@@ -8,13 +8,13 @@ public class Trail : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public void Setup(GameObject target, float duration)
     {
@@ -27,7 +27,7 @@ public class Trail : MonoBehaviour
 
         for (float t = 0; t < 1; t += Time.deltaTime / time)
         {
-        
+
             transform.position = Vector3.Lerp(beginPos, endPos, t);
             yield return null;
         }

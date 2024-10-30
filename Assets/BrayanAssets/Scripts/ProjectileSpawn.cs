@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class ProjectileSpawn : MonoBehaviour
 {
@@ -22,10 +21,10 @@ public class ProjectileSpawn : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             SpawnProjectile();
-          
+
         }
 
-        
+
 
     }
 
@@ -37,7 +36,7 @@ public class ProjectileSpawn : MonoBehaviour
             clone.GetComponent<Rigidbody>().linearVelocity = ProjectileSpawnedLocation.transform.forward * projectileSpeed;
 
         }
-        
+
     }
 
     void MoveObject()
@@ -45,4 +44,3 @@ public class ProjectileSpawn : MonoBehaviour
 
     }
 }
-    
