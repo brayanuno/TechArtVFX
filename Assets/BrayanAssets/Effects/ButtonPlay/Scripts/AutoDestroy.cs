@@ -9,6 +9,7 @@ public class AutoDestroy : MonoBehaviour
 
     private float timer = 0;
 
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -27,6 +28,8 @@ public class AutoDestroy : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+
+        
         else
         {
             if (timer > destroyTimer && gameObject)

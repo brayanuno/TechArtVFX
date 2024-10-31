@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Trail : MonoBehaviour
 {
-
-
+    public float waitToDestroy;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,5 +31,20 @@ public class Trail : MonoBehaviour
             transform.position = Vector3.Lerp(beginPos, endPos, t);
             yield return null;
         }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        other.gameObject.GetComponent<CoinSlot>().IncreaseScore();
+        other.gameObject.GetComponent<CoinSlot>().Hit();
+
+        float entered =  waitToDestroy;
+        StartCoroutine(WaitForSeconds(entered));
+    }
+
+    IEnumerator WaitForSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Destroy(gameObject);
     }
 }

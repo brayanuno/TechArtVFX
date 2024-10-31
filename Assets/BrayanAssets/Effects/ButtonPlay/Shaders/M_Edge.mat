@@ -7,13 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Skull
-  m_Shader: {fileID: -6465566751694194690, guid: db5ded323ebcb0940ad69d49066abf86, type: 3}
+  m_Name: M_Edge
+  m_Shader: {fileID: -6465566751694194690, guid: 82b5a39d89b35a543a868a98a78ef0fc, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -24,20 +24,12 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _SampleTexture2D_3cdb8fcb63a94aff80c32dd26d9201d6_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 866520f01e2a12b4da62d526bcae0e94, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_84691af01731496986a45d3e19dcec48_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: b42ee716f2e24f54c9c1bd720238087b, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_b2f695d4f6ae4db3a48606c4c57abbcb_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: ecccfb2fa0c0b674ea95e38c6aca8163, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_dfd595bc7afe4a55927246b5dc9dfda8_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: b4a7f359a8adbc34f941fd4af10f8e2b, type: 3}
+    - _MainTexture:
+        m_Texture: {fileID: 2800000, guid: d674f7fc7648b5e49b019a27dbbbd42f, type: 3}
+        m_Scale: {x: 1, y: 1.14}
+        m_Offset: {x: 0, y: 1.85}
+    - _NoiseTexture:
+        m_Texture: {fileID: 2800000, guid: 4ec8b94a565afda4288914e29c38d322, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -54,21 +46,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaClip: 0
-    - _FresnelControl: 5.13
-    - _FrontFresnelFront: 2.19
-    - _HoleThickness: 4.19
+    - _ColorContrast: 1.2
+    - _NoiseIntensity: 0.35
+    - _OpacityContrast: 0.42
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _EdgeColor: {r: 181.47353, g: 367.12048, b: 440.52356, a: 0}
-    - _ErosionSpeed: {r: 0.4, g: 0, b: 0, a: 0}
-    - _FresnelColor: {r: 23.41731, g: 170.60631, b: 178.90823, a: 0}
-    - _FrontColor: {r: 0.1836627, g: 18.459473, b: 19.468569, a: 0}
-    - _MainColor: {r: 0.08193417, g: 1.6171588, b: 2.6082375, a: 0}
+    - _DiffuseSpeed: {r: -0.48, g: 0, b: 0, a: 0}
+    - _NoiseSpeed: {r: 0, g: 0.61, b: 0, a: 0}
+    - _NoiseTIle: {r: 4, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &4932247068920192523
+--- !u!114 &7241029867391450426
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

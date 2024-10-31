@@ -23,42 +23,47 @@ public class Skull : MonoBehaviour
    
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = SkullMesh.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.G) && !anim.GetBool("Attack"))
         {
             //img.material.SetTexture("_MainTex", Texture);
-            ScorePoint();
-
-
+            Attack();
 
         }
     }
 
 
-    public void ScorePoint()
+    public void UpdateScore()
     {
-        SpawnTrail();
-
+       
         GameObject effectEyes = Instantiate(EffectEyes,eyesSpawner.position, eyesSpawner.rotation);
         effectEyes.transform.SetParent(eyesSpawner);
     }
 
-    
-
-    public void SpawnTrail()
+    public void SpawnEnergy()
     {
         //SpawnTrail
         GameObject obj = Instantiate(EffectTrail, TrailSpawner.position , this.transform.rotation);
         obj.GetComponent<Trail>().Setup(target, duration);
         obj.transform.SetParent(transform);
-        
-
 
     }
+
+    public void Attack()
+    {
+        anim.SetBool("Attack", true);
+        UpdateScore();
+    }
+
+    public void StopAttack()
+    {
+        anim.SetBool("Attack", false);
+    }
+
 
 }
