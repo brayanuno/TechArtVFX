@@ -5,6 +5,7 @@ using UnityEngine.SocialPlatforms.Impl;
 public class CoinSlot : MonoBehaviour
 {
     public TextMeshProUGUI textmesh;
+    public GameObject EffectHit;
 
     private Animator anim;
 
@@ -24,6 +25,9 @@ public class CoinSlot : MonoBehaviour
 
     public void Hit ()
     {
+        GameObject effectHit = Instantiate(EffectHit, transform);
+        effectHit.transform.SetParent(this.transform);
+
         if (anim){
             anim.Play("hit");
         }
