@@ -51,8 +51,11 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 8
+      - m_Value: 20
         m_Name: Duration
+        m_Overridden: 1
+      - m_Value: 320
+        m_Name: SizeFlare
         m_Overridden: 1
     m_Vector2f:
       m_Array: []
@@ -60,6 +63,9 @@ VisualEffect:
       m_Array:
       - m_Value: {x: 3.2, y: 2.4, z: 1}
         m_Name: Size
+        m_Overridden: 1
+      - m_Value: {x: 3.4, y: 2.4, z: 1}
+        m_Name: SizeMesh
         m_Overridden: 1
     m_Vector4f:
       m_Array: []
