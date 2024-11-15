@@ -32,6 +32,9 @@
         },
         {
             "m_Id": "4f1ea4627f5e47a2804c87181f94729b"
+        },
+        {
+            "m_Id": "25dbb48e007b4a34b717183f268dc370"
         }
     ],
     "m_Keywords": [],
@@ -622,8 +625,8 @@
     ],
     "m_VertexContext": {
         "m_Position": {
-            "x": 885.9998779296875,
-            "y": -277.99993896484377
+            "x": 898.0000610351563,
+            "y": -205.3333282470703
         },
         "m_Blocks": [
             {
@@ -639,8 +642,8 @@
     },
     "m_FragmentContext": {
         "m_Position": {
-            "x": 885.9998779296875,
-            "y": -77.99996185302735
+            "x": 898.0000610351563,
+            "y": -5.333329200744629
         },
         "m_Blocks": [
             {
@@ -1186,9 +1189,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1523.3333740234375,
-            "y": 934.0000610351563,
-            "width": 131.3333740234375,
+            "x": -1548.0,
+            "y": 931.9999389648438,
+            "width": 131.333251953125,
             "height": 36.0
         }
     },
@@ -1207,6 +1210,34 @@
     },
     "m_Property": {
         "m_Id": "6889e21a9bcc4b05813e320658614670"
+    }
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "25dbb48e007b4a34b717183f268dc370",
+    "m_Guid": {
+        "m_GuidSerialized": "472105f3-ef7d-47ce-88d9-7eb2367bdd79"
+    },
+    "m_Name": "GradientEnd",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "GradientEnd",
+    "m_DefaultReferenceName": "_GradientEnd",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 0.0,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
     }
 }
 
@@ -1568,9 +1599,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 330.0000305175781,
-            "y": 1103.3333740234375,
-            "width": 209.33334350585938,
+            "x": 340.0,
+            "y": 1196.66650390625,
+            "width": 209.333251953125,
             "height": 304.0
         }
     },
@@ -2440,10 +2471,10 @@
     "m_Guid": {
         "m_GuidSerialized": "4495dd8f-0b1c-45ce-ae7d-4b859d940c9b"
     },
-    "m_Name": "TilinSpeed",
+    "m_Name": "DiffusePanningU",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "TilinSpeed",
-    "m_DefaultReferenceName": "_TilinSpeed",
+    "m_RefNameGeneratedByDisplayName": "DiffusePanningU",
+    "m_DefaultReferenceName": "_DiffusePanningU",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -3153,10 +3184,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 87.99999237060547,
-            "y": 1115.3333740234375,
+            "x": 109.33333587646485,
+            "y": 1512.0,
             "width": 209.33334350585938,
-            "height": 280.0
+            "height": 279.9998779296875
         }
     },
     "m_Slots": [
@@ -3731,7 +3762,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "ae1d593e7cbe4427b9bda9246ea26e94",
     "m_Id": 0,
-    "m_DisplayName": "TilinSpeed",
+    "m_DisplayName": "DiffusePanningU",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -4014,6 +4045,9 @@
         },
         {
             "m_Id": "4f1ea4627f5e47a2804c87181f94729b"
+        },
+        {
+            "m_Id": "25dbb48e007b4a34b717183f268dc370"
         }
     ]
 }
@@ -4716,9 +4750,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -169.3333282470703,
-            "y": 1105.333251953125,
-            "width": 209.33331298828126,
+            "x": -168.66668701171876,
+            "y": 1402.0,
+            "width": 209.33334350585938,
             "height": 303.9998779296875
         }
     },
