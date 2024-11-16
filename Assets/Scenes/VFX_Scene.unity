@@ -12786,8 +12786,8 @@ RectTransform:
   - {fileID: 1751210911}
   - {fileID: 1984035518}
   - {fileID: 1190009123}
-  - {fileID: 1632596042}
   - {fileID: 1830413509}
+  - {fileID: 1632596042}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -35371,7 +35371,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1190009123
 RectTransform:
   m_ObjectHideFlags: 0
@@ -52141,6 +52141,7 @@ GameObject:
   - component: {fileID: 1632596040}
   - component: {fileID: 1632596044}
   - component: {fileID: 1632596043}
+  - component: {fileID: 1632596045}
   m_Layer: 0
   m_Name: Launcher
   m_TagString: Untagged
@@ -52190,7 +52191,7 @@ VFXRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 368
+  m_SortingOrder: 9
 --- !u!2083052967 &1632596041
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -52213,7 +52214,7 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: -899, y: -558, z: 0.0003474973}
+      - m_Value: {x: -683, y: -731, z: 0.0003474973}
         m_Name: TargetToMove
         m_Overridden: 1
     m_Vector4f:
@@ -52241,7 +52242,7 @@ Transform:
   m_GameObject: {fileID: 1632596039}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 182, y: 318, z: 0}
+  m_LocalPosition: {x: -34, y: 491, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -52279,6 +52280,19 @@ MonoBehaviour:
   m_Bindings:
   - {fileID: 1632596043}
   m_VisualEffect: {fileID: 1632596041}
+--- !u!114 &1632596045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632596039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c056a2b320cda48890d49abddf0596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EffectAsset: {fileID: 1632596041}
 --- !u!1001 &1637051685
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53268,6 +53282,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 199432077098534527, guid: 114fdfb596748374999934ca0f20c8d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3608267943873833666, guid: 114fdfb596748374999934ca0f20c8d9, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7184986531549803286, guid: 114fdfb596748374999934ca0f20c8d9, type: 3}
