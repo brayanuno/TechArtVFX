@@ -7,17 +7,27 @@ public class GameOverDisplay : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        EventsPractice.onPlayerDeath
+        
     }
 
     private void OnEnable()
     {
-        
+        EventsPractice.onPlayerDeath += DisplayGameOver;
+    }
+
+    private void OnDisable()
+    {
+        EventsPractice.onPlayerDeath -= DisplayGameOver;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void DisplayGameOver()
+    {
+
     }
 }
