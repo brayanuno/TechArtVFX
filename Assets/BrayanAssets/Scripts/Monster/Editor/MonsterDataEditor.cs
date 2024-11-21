@@ -4,6 +4,8 @@ using UnityEditor;
 [CustomEditor(typeof(MonsterData))]
 public class MonsterDataEditor : Editor
 {
+
+
     public override void OnInspectorGUI()
     {
         MonsterData data = (MonsterData)target;
@@ -16,6 +18,8 @@ public class MonsterDataEditor : Editor
         float difficulty = data.Health + data.Damage + data.Speed;
 
         ProgressBar(difficulty / 100, "DIFFICULTY");
+
+
         // Add before
         base.OnInspectorGUI();
         // Add after

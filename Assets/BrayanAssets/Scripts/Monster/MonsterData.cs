@@ -18,6 +18,9 @@ public class MonsterData : ScriptableObject
     [SerializeField]
     private float rangeOfAwareness = 10f;
 
+    [SerializeField]
+    private bool _canEnterCombat = true;
+
     [Header("ComboStats")]
     [SerializeField]
     private int damage = 1;
@@ -40,6 +43,8 @@ public class MonsterData : ScriptableObject
     public MonsterType MonsterType { get => monsterType;}
     public float ChangeToDropItem { get => changeToDropItem;}
     public float RangeOfAwareness { get => rangeOfAwareness;}
+
+    public bool canEnterCombat => canEnterCombat;
 
     public int Damage { get => damage; set => damage = value; }
     public int Health { get => health; set => health = value; }
