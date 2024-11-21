@@ -1,29 +1,52 @@
+using System;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class EventsPractice : MonoBehaviour
 {
+    
 
-    public delegate void OnPlayerDeath();
-    public static OnPlayerDeath onPlayerDeath;
+    public static event Action<Color> onUpdateColor;
+
+    [ContextMenu("Get Cubes")]
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void ChangeCubes()
     {
-        onPlayerDeath = null;
+        if (onUpdateColor != null)
+        {
+            onUpdateColor.Invoke(UnityEngine.Random.ColorHSV());
+        }
+
+
+    }
+
+    IEnumerator ChangeCubesRoutine(Action onComplete = null)
+    {
+        yield return new WaitForSeconds(5.0f);
+
+        onComplete?.Invoke();
     }
 
     private void Update()
     {
-        if (onPlayerDeath != null)
+        if(Input.GetKeyDown(KeyCode.Space))
         {
-            onPlayerDeath?.Invoke();
-            EventsPractice.onPlayerDeath = null;
+            ChangeCubes();
+            StartCoroutine(ChangeCubesRoutine(() => printMessage() ));
         }
     }
-    void PlayerDeathFunction ()
 
+    public void printMessage ()
     {
-        //kill the player
+        Debug.Log("FiveSeconds passed");
+    }
+
+    public void RemoveHealth(float amount)
+    {
+
     }
 }
+
+
