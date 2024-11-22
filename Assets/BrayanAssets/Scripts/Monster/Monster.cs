@@ -10,13 +10,17 @@ public class Monster : MonoBehaviour
 
     [Separator(1,2)]
     [SerializeField]
+
     private int health;
+
+    public MonsterData Data { get => data;}
+
     private void Awake()
     {
         
-        Debug.Log("print name: " + data.Name);
+        Debug.Log("print name: " + Data.Name);
 
-        Debug.Log("print Damage: " + data.Damage);
+        Debug.Log("print Damage: " + Data.Damage);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -28,10 +32,10 @@ public class Monster : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, data.RangeOfAwareness);
+        Gizmos.DrawWireSphere(transform.position, Data.RangeOfAwareness);
 
         Gizmos.color = Color.green;
-        Vector3 direction = transform.forward * data.RangeOfAwareness;
+        Vector3 direction = transform.forward * Data.RangeOfAwareness;
         Gizmos.DrawRay(transform.position, direction);
     }   
         

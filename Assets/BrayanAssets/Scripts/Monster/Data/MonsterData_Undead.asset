@@ -10,18 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dde94796af219d145b1978dbabbff55d, type: 3}
-  m_Name: MonsterData_Dragon
+  m_Name: MonsterData_Undead
   m_EditorClassIdentifier: 
-  name: naming
-  monsterType: 3
-  chanceToDropItem: 20
-  rangeOfAwareness: 10
+  name: Undead
+  monsterType: 1
+  chanceToDropItem: 27.9
+  rangeOfAwareness: 3.5
   canEnterCombat: 1
-  damage: 1
-  health: 1
-  speed: 1
+  damage: 38
+  health: 15
+  speed: 44
   battlecry: ...
   abilities:
+  - name: 
+    damage: 88
+    elementType: 0
+  - name: wafaw
+    damage: 147
+    elementType: 0
+  - name: 
+    damage: 0
+    elementType: 0
+  - name: 
+    damage: 0
+    elementType: 0
+  - name: 
+    damage: 0
+    elementType: 0
   - name: 
     damage: 0
     elementType: 0

@@ -4,7 +4,6 @@ using UnityEngine;
 public class MonsterData : ScriptableObject
 {
 
-    [Header("GeneralStats")]
     [SerializeField]
     private string name = "....";
 
@@ -13,15 +12,15 @@ public class MonsterData : ScriptableObject
 
     [SerializeField]
     [Range(0, 100)]
-    private float changeToDropItem = 20f;
+    private float chanceToDropItem = 20f;
 
     [SerializeField]
     private float rangeOfAwareness = 10f;
 
     [SerializeField]
-    private bool _canEnterCombat = true;
+    private bool canEnterCombat = true;
 
-    [Header("ComboStats")]
+    //[Header("ComboStats")]
     [SerializeField]
     private int damage = 1;
 
@@ -31,22 +30,26 @@ public class MonsterData : ScriptableObject
     [SerializeField]
     private int speed = 1;
 
-    [Header("Dialogue")]
+    //[Header("Dialogue")]
     [SerializeField]
     [Tooltip("Speak dialogue when entering combat")]
+
     [TextArea()]
     private string battlecry = "..." ;
 
+    [SerializeField]
+    private MonsterAbility[] abilities;
 
     public string Name => name; 
 
     public MonsterType MonsterType { get => monsterType;}
-    public float ChangeToDropItem { get => changeToDropItem;}
+    public float ChangeToDropItem { get => chanceToDropItem;}
     public float RangeOfAwareness { get => rangeOfAwareness;}
 
-    public bool canEnterCombat => canEnterCombat;
+    public bool CanEnterCombat => canEnterCombat;
 
-    public int Damage { get => damage; set => damage = value; }
-    public int Health { get => health; set => health = value; }
-    public int Speed { get => speed; set => speed = value; }
+    public int Damage { get => damage;}
+    public int Health { get => health;}
+    public int Speed { get => speed;  }
+    public MonsterAbility[] Abilities  => abilities; 
 }
