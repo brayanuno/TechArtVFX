@@ -767,11 +767,13 @@ MonoBehaviour:
   jumpForce: 17.26
   groundCheck: {fileID: 169873330}
   groundCheckDistance: 0.68
-  wallCheck: {fileID: 1487238567}
-  wallCheckDistance: 0.81
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  wallCheck: {fileID: 1487238567}
+  wallCheckDistance: 0.81
+  timer: 0
+  cooldown: 4
 --- !u!50 &1983669033
 Rigidbody2D:
   serializedVersion: 5

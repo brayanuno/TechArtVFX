@@ -12,9 +12,11 @@ public class Player : MonoBehaviour
     [Header("Collision Info")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckDistance;
+    [SerializeField] private LayerMask whatIsGround;
+    //Wall
     [SerializeField] private Transform wallCheck;
     [SerializeField] private float wallCheckDistance;
-    [SerializeField] private LayerMask whatIsGround;
+     
 
     public int facingDirection { get; private set; } = 1;
     private bool facingRight = true;
@@ -35,6 +37,8 @@ public class Player : MonoBehaviour
     public PlayerJumpState jumpState { get; private set; }
 
     public PlayerAirState airState { get; private set; }
+
+    public PlayerDashState dashState { get; private set; }
     #endregion
 
     private void Awake()
@@ -48,6 +52,8 @@ public class Player : MonoBehaviour
         jumpState = new PlayerJumpState(this, stateMachine, "Jump");
 
         airState = new PlayerAirState(this, stateMachine, "Jump");
+
+        dashState = new PlayerDashState(this, stateMachine , "Dash");
 
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -97,6 +103,8 @@ public class Player : MonoBehaviour
 
 
     }
+    
+    //Flipping the character always
     public void Flip()
     {
         facingDirection = facingDirection * -1;
@@ -104,6 +112,7 @@ public class Player : MonoBehaviour
         transform.Rotate(0, 180, 0);
     }
 
+    //Control how the Flipping Character Works 
     public void FlipController(float x)
     {
         if (x > 0 && !facingRight)
