@@ -1,16 +1,17 @@
 using UnityEngine;
 
-public class PlayerAirState : PlayerState
+public class PlayerDashState : PlayerState
 {
-    public PlayerAirState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
+    public PlayerDashState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
-
 
     }
 
     public override void Enter()
     {
         base.Enter();
+
+        stateTimer = 1.5f;
     }
 
     public override void ExitState()
@@ -22,9 +23,12 @@ public class PlayerAirState : PlayerState
     {
         base.update();
 
-        if (player.isGroundDetected())
+        if (stateTimer < 0)
             statemachine.ChangeState(player.idleState);
 
-      
+
+
     }
+
+
 }
