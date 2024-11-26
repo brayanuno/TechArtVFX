@@ -29,5 +29,7 @@ public class PlayerJumpState : PlayerState
         {
             statemachine.ChangeState(player.airState);
         }
+
+
     }
 }
