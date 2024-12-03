@@ -15,15 +15,15 @@ public static class CustomHierarchyOptions
 
     static void hierarchyWindowItemOnGui(int id , Rect rect)
     {
-        DrawActiveToggleButton(id, rect);
+        //DrawActiveToggleButton(id, rect);
 
-        AddInfoScriptToHierarchyGameObjects(id);
+        //AddInfoScriptToHierarchyGameObjects(id);
 
         //buttons
-        DrawInfoButton(id, rect, "");
+        //DrawInfoButton(id, rect, "");
         DrawZoomButton(id, rect, "Zoom And Frame This Object");
-        DrawPrefabButton(id, rect, "Save as Prefab");
-        DrawDeleteButton(id, rect, "DeleteObject");
+        //DrawPrefabButton(id, rect, "Save as Prefab");
+        //DrawDeleteButton(id, rect, "DeleteObject");
         
     }
 

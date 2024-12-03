@@ -11,19 +11,24 @@ public class PlayerDashState : PlayerState
     {
         base.Enter();
 
-        stateTimer = 1.5f;
+        stateTimer = player.dashDuration;
     }
 
     public override void ExitState()
     {
         base.ExitState();
+
+        player.SetVelocity(0, rb.linearVelocity.y);
     }
 
     public override void update()
     {
         base.update();
 
+        player.SetVelocity(player.dashSpeed * player.facingDirection, 0);
+
         if (stateTimer < 0)
+           
             statemachine.ChangeState(player.idleState);
 
     }

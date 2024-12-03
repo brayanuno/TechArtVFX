@@ -1,6 +1,9 @@
 using System.Threading;
 using Unity.VisualScripting;
+using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 public class Player : MonoBehaviour
 {
@@ -8,6 +11,14 @@ public class Player : MonoBehaviour
     public float moveSpeed = 12f;
 
     public float jumpForce = 3f;
+
+    [Header("Dash Info")]
+    public float dashSpeed;
+    public float dashDuration = 5f;
+
+    [SerializeField] private float dashCooldown = 4f;
+    private float dashUsageTimer;
+    public float dashDirection { get; private set; }
 
     [Header("Collision Info")]
     [SerializeField] private Transform groundCheck;
@@ -39,6 +50,9 @@ public class Player : MonoBehaviour
     public PlayerAirState airState { get; private set; }
 
     public PlayerDashState dashState { get; private set; }
+
+    public PlayerWallSlideState wallSlideState { get; private set; }
+
     #endregion
 
     private void Awake()
@@ -55,6 +69,7 @@ public class Player : MonoBehaviour
 
         dashState = new PlayerDashState(this, stateMachine , "Dash");
 
+        wallSlideState = new PlayerWallSlideState(this, stateMachine, "WallSlide");
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -68,22 +83,15 @@ public class Player : MonoBehaviour
 
     }
 
-    public float timer;
-    public float cooldown = 4;
 
     // Update is called once per frame
     private void Update()
     {
         stateMachine.currentSate.update();
 
-        timer -= Time.deltaTime;
-
-        if (timer < 0 && Input.GetKeyDown(KeyCode.R))
-        {
-            timer = cooldown;
-        }
-
         
+        Debug.Log(isWallDetected());
+        checkForDashInput();
     }
 
     public void SetVelocity (float xVelocity, float yVelocity)
@@ -93,7 +101,7 @@ public class Player : MonoBehaviour
     }
 
     public bool isGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
-    
+    public bool isWallDetected() => Physics2D.Raycast(groundCheck.position, Vector2.right * facingDirection, wallCheckDistance, whatIsGround);
 
     private void OnDrawGizmos()
     {
@@ -104,6 +112,23 @@ public class Player : MonoBehaviour
 
     }
     
+
+    public void checkForDashInput ()
+    {
+        dashUsageTimer -= Time.deltaTime;
+
+        if (UnityEngine.Input.GetKeyDown(KeyCode.LeftShift) && dashUsageTimer < 0)
+        {
+            dashUsageTimer = dashCooldown;
+            dashDirection = UnityEngine.Input.GetAxisRaw("Horizontal");
+
+            if (dashDirection == 0)
+                dashDirection = facingDirection;
+
+            stateMachine.ChangeState(dashState);
+        }
+    }
+
     //Flipping the character always
     public void Flip()
     {

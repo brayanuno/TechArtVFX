@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class PlayerState 
@@ -9,6 +9,7 @@ public class PlayerState
     protected Rigidbody2D rb;
 
     protected float xInput;
+    protected float yInput;
     protected string animBoolName;
 
     protected float stateTimer;
@@ -28,11 +29,13 @@ public class PlayerState
     }
     public virtual void update()
     {
-        stateTimer = Time.deltaTime;
+        stateTimer -= Time.deltaTime;
 
         xInput = Input.GetAxisRaw("Horizontal");
-
+        yInput = Input.GetAxisRaw("Vertical");
         player.anim.SetFloat("YVelocity", rb.linearVelocity.y);
+
+        Debug.Log(yInput);
     }
 
     public virtual void ExitState()

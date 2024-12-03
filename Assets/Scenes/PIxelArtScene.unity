@@ -575,7 +575,7 @@ Transform:
   m_GameObject: {fileID: 777262585}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.18, y: 7.66, z: 0}
+  m_LocalPosition: {x: -15.7, y: 2.2, z: 0}
   m_LocalScale: {x: 13.568099, y: 7.8512726, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -870,7 +870,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 90.4
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1224,7 +1224,7 @@ Transform:
   m_GameObject: {fileID: 1982511119}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.66, y: 7.89, z: 0}
+  m_LocalPosition: {x: 11.79, y: 7.3, z: 0}
   m_LocalScale: {x: 13.568099, y: 8.64125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1293,8 +1293,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d72921127b6fab745a2445c93eeeb069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
+  moveSpeed: 7.4
   jumpForce: 17.26
+  dashSpeed: 18
+  dashDuration: 0.32
+  dashCooldown: 2.37
   groundCheck: {fileID: 169873330}
   groundCheckDistance: 0.68
   whatIsGround:
@@ -1302,8 +1305,6 @@ MonoBehaviour:
     m_Bits: 8
   wallCheck: {fileID: 1487238567}
   wallCheckDistance: 0.81
-  timer: 0
-  cooldown: 4
 --- !u!50 &1983669033
 Rigidbody2D:
   serializedVersion: 5
@@ -1341,7 +1342,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 4ebf51d5de3916d4984a096af93209f8, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
