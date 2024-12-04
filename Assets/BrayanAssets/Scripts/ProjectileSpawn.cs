@@ -5,9 +5,9 @@ public class ProjectileSpawn : MonoBehaviour
     // Start is called once before the first
     // execution of Update after the MonoBehaviour is created
 
-    public GameObject ProjectileToSpawn;
-    public Transform ProjectileSpawnedLocation;
 
+
+    public float launchVelocity = 400f;
     public float projectileSpeed;
 
     void Start()
@@ -30,13 +30,9 @@ public class ProjectileSpawn : MonoBehaviour
 
     void SpawnProjectile()
     {
-        if (ProjectileToSpawn != null)
-        {
-            GameObject clone = Instantiate(ProjectileToSpawn, ProjectileSpawnedLocation.transform.position, Quaternion.identity);
-            clone.GetComponent<Rigidbody>().linearVelocity = ProjectileSpawnedLocation.transform.forward * projectileSpeed;
 
-        }
-
+        GetComponent<Rigidbody>().AddRelativeForce(new Vector3
+                                               (0, launchVelocity, 0));
     }
 
     void MoveObject()
