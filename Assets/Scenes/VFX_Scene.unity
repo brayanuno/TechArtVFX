@@ -6913,7 +6913,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &381866673
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6933,7 +6933,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 200}
+  m_SizeDelta: {x: 477.8, y: 210.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &381866674
 MonoBehaviour:
@@ -36550,16 +36550,16 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: -0.22933668, y: 13.447729, z: 8.424573}
+      - m_Value: {x: -0.22933668, y: 13.415624, z: 8.464321}
         m_Name: Position2
         m_Overridden: 1
       - m_Value: {x: 0, y: 0, z: 0}
         m_Name: Position1
         m_Overridden: 0
-      - m_Value: {x: 0.13298583, y: 12.390048, z: 9.720744}
+      - m_Value: {x: 0.037685424, y: 12.636141, z: 9.419565}
         m_Name: Position3
         m_Overridden: 1
-      - m_Value: {x: -1.8148599, y: 12.128038, z: 10.116615}
+      - m_Value: {x: -1.3978255, y: 12.443047, z: 9.711311}
         m_Name: Position4
         m_Overridden: 1
     m_Vector4f:
@@ -37521,7 +37521,7 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: -682.99994, y: -731, z: 0.00015029078}
+      - m_Value: {x: -682.9999, y: -730.9997, z: 0.00027221497}
         m_Name: TargetToMove
         m_Overridden: 1
     m_Vector4f:
@@ -44765,6 +44765,10 @@ PrefabInstance:
     - target: {fileID: 967094716235932064, guid: 75962628dae997e4dbab846bbb06744e, type: 3}
       propertyPath: m_Name
       value: LoopingEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 967094716235932064, guid: 75962628dae997e4dbab846bbb06744e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4842960587820535343, guid: 75962628dae997e4dbab846bbb06744e, type: 3}
       propertyPath: ShapeModule.m_Scale.x
