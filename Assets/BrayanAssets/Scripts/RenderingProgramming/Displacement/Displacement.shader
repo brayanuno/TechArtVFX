@@ -1,28 +1,18 @@
-Shader "Unlit/Transparent"
+Shader "Unlit/Displacement"
 {
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _Color ("MainColor",color) = (1,1,1,1)
-
-
-        [Enum(UnityEngine.Rendering.BlendMode)]
-        _SrcFactor("Src Factor",float) = 5
-        [Enum(UnityEngine.Rendering.BlendMode)]
-        _DestFactor("Dst Factor",float) = 10
-        [Enum(UnityEngine.Rendering.BlendOp)]
-        _Opp("Operation",float) = 0
     }
     SubShader
     {
         Tags { "RenderType"="Opaque" }
         LOD 100
-        Blend [_SrcFactor] [_DestFactor] 
-        BlendOp [_Opp]
-
 
         Pass
         {
+            Cull Off
+
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -40,21 +30,27 @@ Shader "Unlit/Transparent"
             struct v2f
             {
                 float2 uv : TEXCOORD0;
-                UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
             };
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
 
-            float4 _Color;
-
             v2f vert (appdata v)
             {
                 v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                UNITY_TRANSFER_FOG(o,o.vertex);
+                o.uv = v.uv;
+                float XMod = tex2Dlod(_MainTex,o.float4(o.uv.xy,0,1));
+
+
+                o.uv = o.uv * 2 -1;
+                o.uv.x = sin(length(o.uv.xy)* 1 + _Time.y);
+                float3 vert = v.vertex;
+                vert.z = 0.uv.x * 10;
+
+
+                o.vertex = UnityObjectToClipPos(vert);
+                // o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 return o;
             }
 
@@ -62,8 +58,7 @@ Shader "Unlit/Transparent"
             {
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
-                // apply fog
-                UNITY_APPLY_FOG(i.fogCoord, col);
+
                 return col;
             }
             ENDCG
