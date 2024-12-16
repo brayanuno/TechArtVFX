@@ -5,6 +5,8 @@ Shader "Unlit/Mainimage"
         _MainTex ("Texture", 2D) = "white" {}
         _speedAnim ("SpeedAnim", float) = 1.0
         [HDR] _Color ("Color", Color) = (1,1,1,1)
+
+        _tileGrad ("Tileable", float) = 8.0
     }
     SubShader
     {
@@ -37,6 +39,7 @@ Shader "Unlit/Mainimage"
 
             float4 _Color;
             float _speedAnim ;
+            float _tileGrad;
 
             v2f vert (appdata v)
             {
@@ -64,8 +67,10 @@ Shader "Unlit/Mainimage"
             {
                 //The UVS     
                 float2 uv = i.uv;
-                uv *= 2;
-                uv -= 1;
+                uv *= _tileGrad;
+                uv = frac(uv);
+                uv -= .5;
+                // uv -= 1;
 
                 float grad = length(uv);
 
@@ -79,12 +84,12 @@ Shader "Unlit/Mainimage"
 
                 grad = smoothstep(0.0, 1, grad);
 
-                fixed3 col = palette(grad + _Time * 10) ;
+                fixed3 col = palette(grad + _Time * 40) ;
 
                 col *= grad;
                 // sample the texture
                 // fixed4 col = tex2D(_MainTex, i.uv);
-
+               
 
                 // fixed4 col =  d * _Color;
 

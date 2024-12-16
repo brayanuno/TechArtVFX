@@ -88,6 +88,7 @@ Shader "Unlit/MaskingEdges"
                 float erodeBottom = step(mask.r,_Erosion - _EdgeThickness);
                 float EdgeAmount = erodeTop - erodeBottom;
 
+
                 // finalColor
                 float3 finalColor = lerp(col.rgb , _ColorEdge , EdgeAmount);
 
