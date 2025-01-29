@@ -37,6 +37,18 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _MainTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_803c74ebcb834eee8006acbf7c1f74a8_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 881a7dee2d695b84db728b6a424007a1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_e1d98b8c20fd49488ffddb219c1a5f96_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: a6d5a65bc62d87544b02e07d8dd4a8c1, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -55,8 +67,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _ColorContrast: 0.98
+    - _Emmisive: 1
+    - _MaskPower: 1
+    - _NoiseDistortion: 0.14
     - _QueueControl: 0
     - _QueueOffset: 0
-    m_Colors: []
+    - _Rotation: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _MainSpeed: {r: 0.84, g: 0, b: 0, a: 0}
+    - _NoiseSpeed: {r: 3.32, g: 0.36, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
