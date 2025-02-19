@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 225244793561215200}
   - component: {fileID: 1059117358442541936}
   - component: {fileID: 5161026791424680294}
-  - component: {fileID: 6404289228808851968}
-  - component: {fileID: 8075585573955133054}
+  - component: {fileID: 5722667433122697674}
   m_Layer: 0
   m_Name: TrailMovement
   m_TagString: Untagged
@@ -29,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1913844338124337764}
   serializedVersion: 2
-  m_LocalRotation: {x: -3.6379792e-12, y: -0, z: 4.6566134e-10, w: 1}
-  m_LocalPosition: {x: -34, y: 252.7464, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -54,14 +53,14 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 3
+      - m_Value: 3.39
         m_Name: Life
         m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: -140, y: -910.7462, z: -0.00037320997}
+      - m_Value: {x: -0.17676792, y: 14.202595, z: 7.488078}
         m_Name: TargetToMove
         m_Overridden: 1
       - m_Value: {x: -140, y: -910.7462, z: -0.00037321}
@@ -169,22 +168,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ExecuteInEditor: 1
   m_Bindings:
-  - {fileID: 8075585573955133054}
+  - {fileID: 5722667433122697674}
   m_VisualEffect: {fileID: 225244793561215200}
---- !u!114 &6404289228808851968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1913844338124337764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9c056a2b320cda48890d49abddf0596, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EffectAsset: {fileID: 0}
---- !u!114 &8075585573955133054
+--- !u!114 &5722667433122697674
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -196,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07c3070554d0a8944a95ff8f018c2c9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Space: 2
+  Space: 0
   m_Property:
     m_Name: TargetToMove
   Target: {fileID: 0}

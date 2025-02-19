@@ -1,9 +1,13 @@
 using UnityEngine;
 using UnityEditor;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Drawing;
+using Unity.VisualScripting;
 using UnityEditor.UIElements;
+using Color = UnityEngine.Color;
+using Object = UnityEngine.Object;
 
 [InitializeOnLoad]
 public static class CustomHierarchyOptions 
@@ -12,21 +16,40 @@ public static class CustomHierarchyOptions
     {
         EditorApplication.hierarchyWindowItemOnGUI += hierarchyWindowItemOnGui;
     }
-
+    
     static void hierarchyWindowItemOnGui(int id , Rect rect)
     {
+        GameObject obj = EditorUtility.InstanceIDToObject(id) as GameObject;
+        if (obj != null)
+        {
+            if (obj.GetComponents<Component>().Length == 1 && obj.GetComponent<Transform>() != null &&
+                obj.name.StartsWith("["))
+            {
+                
+                
+                DrawButtonWithCustomTexture(rect.x + -2 , rect.y -2, 18, "Folder",
+                    () =>
+                    {
+                        Selection.activeGameObject = obj;
+                        SceneView.FrameLastActiveSceneView();
+                    }, obj, "Folder");
+            }
+        }
+        
         //DrawActiveToggleButton(id, rect);
 
         //AddInfoScriptToHierarchyGameObjects(id);
 
         //buttons
         //DrawInfoButton(id, rect, "");
-        DrawZoomButton(id, rect, "Zoom And Frame This Object");
+        
+        /*DrawZoomButton(id, rect, "Zoom And Frame This Object");*/
+        
         //DrawPrefabButton(id, rect, "Save as Prefab");
         //DrawDeleteButton(id, rect, "DeleteObject");
         
     }
-
+    
     #region ToggleVisibility
     static Rect DrawRect(float x , float y , float size )
     {
@@ -56,7 +79,7 @@ public static class CustomHierarchyOptions
     // DrawInfoIcon
     static void DrawButtonWithCustomTexture (float x, float y, float size , string name, Action action,GameObject gameObj, string tooltip)
     {
-        if(gameObj)
+        if(gameObj )
         {
             GUIStyle guiStyle = new GUIStyle();
             guiStyle.fixedHeight = 0;
@@ -64,7 +87,7 @@ public static class CustomHierarchyOptions
             guiStyle.stretchHeight = true;
             guiStyle.stretchWidth = true;
 
-
+            
             Rect r = DrawRect(x, y, size);
             Texture t = Resources.Load(name) as Texture;
 
@@ -119,21 +142,20 @@ public static class CustomHierarchyOptions
 
     }
     #endregion
-
+    
+    //Draw ZoomButton
     static void DrawZoomButton(int id , Rect rect, string tooltip)
     {
-        GameObject gameObj = EditorUtility.InstanceIDToObject(id) as GameObject;
+       
+        
+        GameObject[] allObjects = Object.FindObjectsOfType<GameObject>();
+        List<GameObject> ObjectsToLook = new List<GameObject>();
+        
+        
+        
 
-        if (gameObj)
-        {
-            DrawButtonWithCustomTexture(rect.x + 175, rect.y + 2, 14, "zoom_in",
-                                    () =>
-        {
-            Selection.activeGameObject = gameObj;
-            SceneView.FrameLastActiveSceneView();
-        }, gameObj, tooltip);
+        
 
-        }
     }
 
     static void DrawPrefabButton(int id , Rect rect, string toolTip)
