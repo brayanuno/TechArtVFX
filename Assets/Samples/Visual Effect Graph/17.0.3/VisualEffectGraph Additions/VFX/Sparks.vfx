@@ -236,8 +236,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: -827
     y: -335
-    width: 1939
-    height: 2303
+    width: 1973
+    height: 2324
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1201,6 +1201,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081ffb0090424ba4cb05370a42ead6b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_UIIgnoredErrors: []
+  m_Parent: {fileID: 0}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  opaqueRenderQueue: 0
+  transparentRenderQueue: 1
 --- !u!114 &8926484042661614551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7424,7 +7432,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615026}
       inputSlot: {fileID: 114158099937248418}
-    position: {x: 493, y: 1542}
+    position: {x: 282.66666, y: 1524.6666}
     expandedSlots: []
     expanded: 0
     supecollapsed: 0
@@ -7505,7 +7513,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615028}
       inputSlot: {fileID: 8926484042661614628}
-    position: {x: 460, y: 1459}
+    position: {x: 250, y: 1441.3333}
     expandedSlots: []
     expanded: 0
     supecollapsed: 0
@@ -7583,10 +7591,8 @@ MonoBehaviour:
   m_Tooltip: 
   m_Nodes:
   - m_Id: 0
-    linkedSlots:
-    - outputSlot: {fileID: 8926484042661615030}
-      inputSlot: {fileID: 0}
-    position: {x: 456, y: 1500}
+    linkedSlots: []
+    position: {x: 246, y: 1482.6666}
     expandedSlots: []
     expanded: 0
     supecollapsed: 0
@@ -7666,7 +7672,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615032}
       inputSlot: {fileID: 114888496708539098}
-    position: {x: 504, y: 1882}
+    position: {x: 294, y: 1864.6666}
     expandedSlots: []
     expanded: 0
     supecollapsed: 0
@@ -7747,7 +7753,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615037}
       inputSlot: {fileID: 8926484042661615075}
-    position: {x: 517, y: 1704}
+    position: {x: 306.66666, y: 1686.6666}
     expandedSlots: []
     expanded: 0
     supecollapsed: 0

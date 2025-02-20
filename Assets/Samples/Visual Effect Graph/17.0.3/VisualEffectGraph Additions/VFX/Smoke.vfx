@@ -161,7 +161,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"276d9e395ae18fe40a9b4988549f2349","type":3}}'
+      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"de0fae515169ff246a20d58a8a440ed0","type":3}}'
     m_Space: -1
   m_Property:
     name: mainTexture
@@ -263,10 +263,10 @@ MonoBehaviour:
     collapsed: 1
   uiBounds:
     serializedVersion: 2
-    x: -381
+    x: -454
     y: -241
-    width: 1488
-    height: 2331
+    width: 1594
+    height: 2431
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1364,6 +1364,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081ffb0090424ba4cb05370a42ead6b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_UIIgnoredErrors: []
+  m_Parent: {fileID: 0}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  opaqueRenderQueue: 0
+  transparentRenderQueue: 1
 --- !u!114 &8926484042661614556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1714,7 +1722,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: -381, y: 126}
+  m_UIPosition: {x: -454, y: 79}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -2655,7 +2663,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661614627}
       inputSlot: {fileID: 8926484042661614611}
-    position: {x: -320, y: 315}
+    position: {x: -380, y: 313.3333}
     expandedSlots: []
     expanded: 0
     supecollapsed: 0
@@ -3960,7 +3968,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661614708}
       inputSlot: {fileID: 114158099937248418}
-    position: {x: 501, y: 1560}
+    position: {x: 488.66666, y: 1594.6666}
     expandedSlots: []
     expanded: 0
     supecollapsed: 0
@@ -4041,7 +4049,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661614717}
       inputSlot: {fileID: 8926484042661614761}
-    position: {x: 264, y: 1442}
+    position: {x: 213.33334, y: 1410.6666}
     expandedSlots: []
     expanded: 0
     supecollapsed: 0
@@ -4203,7 +4211,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661614732}
       inputSlot: {fileID: 8926484042661614856}
-    position: {x: 432, y: 1503}
+    position: {x: 432, y: 1511.3333}
     expandedSlots: []
     expanded: 0
     supecollapsed: 0
@@ -4813,7 +4821,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661614755}
       inputSlot: {fileID: 8926484042661614757}
-    position: {x: 266, y: 1394}
+    position: {x: 224, y: 1318}
     expandedSlots: []
     expanded: 0
     supecollapsed: 0
