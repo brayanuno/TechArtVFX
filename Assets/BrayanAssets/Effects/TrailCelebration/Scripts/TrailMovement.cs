@@ -15,7 +15,7 @@ public class TrailMovement : MonoBehaviour
     private bool trailReleased = false;
     void Start()
     {
-        driverTrail.gameObject.SetActive(false);
+        /*driverTrail.gameObject.SetActive(false);*/
     }
 
     // ReSharper disable Unity.PerformanceAnalysis
