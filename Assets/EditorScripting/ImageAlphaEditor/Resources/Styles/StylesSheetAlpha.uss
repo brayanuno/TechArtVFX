@@ -1,0 +1,18 @@
+VisualElement {
+}
+
+#width-field > Label {
+    max-width: 50px;
+    min-width: 50px;
+}
+
+#height-field > Label {
+    max-width: 50px;
+    min-width: 50px;
+}
+
+#alpha-input > #unity-text-input {
+    max-width: 30px;
+    min-width: 30px;
+    margin-left: 5px;
+}

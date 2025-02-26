@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1913844338124337764
+--- !u!1 &2810414463779473297
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,42 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8653290882473463002}
-  - component: {fileID: 225244793561215200}
-  - component: {fileID: 1059117358442541936}
-  - component: {fileID: 5161026791424680294}
-  - component: {fileID: 5722667433122697674}
+  - component: {fileID: 5054407771118838370}
+  - component: {fileID: 65556298183173656}
+  - component: {fileID: 8778575999231686966}
+  - component: {fileID: 5748931446430071515}
   m_Layer: 0
-  m_Name: TrailMovement
+  m_Name: Impact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8653290882473463002
+--- !u!4 &5054407771118838370
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1913844338124337764}
+  m_GameObject: {fileID: 2810414463779473297}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.17676792, y: 14.202595, z: 7.488078}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!2083052967 &225244793561215200
+--- !u!2083052967 &65556298183173656
 VisualEffect:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1913844338124337764}
+  m_GameObject: {fileID: 2810414463779473297}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: fe9572d66bbfb8e4ab3b25083ba93a4e, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: 31d63b2d3e4ec374f975c4e1cba01704, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -52,23 +51,11 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array:
-      - m_Value: 3.39
-        m_Name: Life
-        m_Overridden: 1
+      m_Array: []
     m_Vector2f:
       m_Array: []
     m_Vector3f:
-      m_Array:
-      - m_Value: {x: -0.17676792, y: 14.202595, z: 7.488078}
-        m_Name: TargetToMove
-        m_Overridden: 1
-      - m_Value: {x: -140, y: -910.7462, z: -0.00037321}
-        m_Name: New Oriented Box_center
-        m_Overridden: 1
-      - m_Value: {x: 180, y: 180, z: 180}
-        m_Name: New Oriented Box_size
-        m_Overridden: 1
+      m_Array: []
     m_Vector4f:
       m_Array: []
     m_Uint:
@@ -78,47 +65,21 @@ VisualEffect:
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
-      m_Array:
-      - m_Value:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0.0011825562
-            value: 0
-            inSlope: 0.5052425
-            outSlope: 0.5052425
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0.074254975
-          - serializedVersion: 3
-            time: 1
-            value: 1
-            inSlope: 0.4591465
-            outSlope: 0.4591465
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.08094316
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        m_Name: MotionProjectileFire
-        m_Overridden: 1
+      m_Array: []
     m_Gradient:
       m_Array: []
     m_NamedObject:
       m_Array: []
     m_Bool:
       m_Array: []
---- !u!73398921 &1059117358442541936
+--- !u!73398921 &8778575999231686966
 VFXRenderer:
   serializedVersion: 1
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1913844338124337764}
+  m_GameObject: {fileID: 2810414463779473297}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 0
@@ -153,36 +114,20 @@ VFXRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 9
---- !u!114 &5161026791424680294
+  m_SortingOrder: 32
+--- !u!114 &5748931446430071515
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1913844338124337764}
+  m_GameObject: {fileID: 2810414463779473297}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdafc37f32b176349b1684c4455b98e9, type: 3}
+  m_Script: {fileID: 11500000, guid: f42448859dd04334184b286a21a6ff06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ExecuteInEditor: 1
-  m_Bindings:
-  - {fileID: 5722667433122697674}
-  m_VisualEffect: {fileID: 225244793561215200}
---- !u!114 &5722667433122697674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1913844338124337764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07c3070554d0a8944a95ff8f018c2c9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Space: 0
-  m_Property:
-    m_Name: TargetToMove
-  Target: {fileID: 0}
+  targetPos: {fileID: 0}
+  impactObject: {fileID: 0}
+  impactEffect: {fileID: 2810414463779473297}
+  lifeTime: 2

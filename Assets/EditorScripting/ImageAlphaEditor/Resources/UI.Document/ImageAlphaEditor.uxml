@@ -1,0 +1,22 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/EditorScripting/ImageAlphaEditor/Resources/Styles/StylesSheetAlpha.uss?fileID=7433441132597879392&amp;guid=63b94a5519c27f848b2f6aade61c6a0e&amp;type=3#StylesSheetAlpha" />
+    <engine:Label text="IMAGE ALPHA EDITOR&#10;" name="Title" style="color: rgb(255, 255, 255); font-size: 26px; background-position-x: center 0; background-position-y: center 0; -unity-text-outline-color: rgba(255, 89, 89, 0); -unity-text-align: upper-center;" />
+    <engine:DropdownField label="TextureOptions&#10;" name="texture-option" choices="GenerateNewTexture." index="0" style="-unity-text-align: upper-left; font-size: 12px; text-shadow: 0 0 0 rgba(255, 255, 255, 0); -unity-background-scale-mode: stretch-to-fill;" />
+    <engine:VisualElement name="custom-text-values" style="flex-grow: 1; height: 100%; align-self: flex-start; justify-content: flex-start; align-items: flex-start; align-content: flex-start; position: relative; max-height: 31px; flex-direction: row; flex-wrap: nowrap;">
+        <engine:IntegerField label="Width&#10;" value="42" name="width-field" style="-unity-background-scale-mode: stretch-to-fill; background-position-x: center 0; opacity: 1; flex-direction: row;" />
+        <engine:IntegerField label="Height&#10;" value="42" name="height-field" style="opacity: 1;" />
+        <engine:Button text="Create Texture" name="create-text-button" selectable="false" parse-escape-sequences="false" style="flex-direction: column; align-items: center; align-self: auto; align-content: flex-start; flex-grow: 1;" />
+    </engine:VisualElement>
+    <editor:ObjectField label="Texture" name="texture-field" type="UnityEngine.Texture2D, UnityEngine.CoreModule" />
+    <engine:DropdownField label="AlphaWhole&#10;" name="alpha-dropdown" index="0" choices="Alpha Whole,Gradient Right,Gradient Left,Gradient Bottom,Gradient Top" />
+    <engine:Slider label="Slider" value="255" high-value="255" name="Alpha-Slider" show-input-field="false">
+        <engine:IntegerField value="42" name="alpha-input" />
+    </engine:Slider>
+    <editor:GradientField label="Gradient" value="Blend:{0,#FF0000FF};{1,#0000FFFF};{1,#00FF00FF}+{0,1};{1,1}" />
+    <engine:VisualElement name="preview-area" style="flex-grow: 0.2; height: 350px;">
+        <editor:ColorField label="Color" value="#00FFFFFF" name="tint" />
+        <engine:VisualElement name="preview-panel" style="flex-grow: 1; background-image: resource(&apos;Transparency500 (1)&apos;);">
+            <engine:VisualElement name="image-preview" style="flex-grow: 1; width: 300px; height: 300px; max-height: none; min-height: auto; min-width: auto; align-items: center; justify-content: space-between; align-content: flex-start; flex-direction: column; align-self: center;" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
