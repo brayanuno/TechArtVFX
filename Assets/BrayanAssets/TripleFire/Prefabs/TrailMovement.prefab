@@ -67,11 +67,17 @@ VisualEffect:
       - m_Value: 1.01
         m_Name: WidthTrails
         m_Overridden: 1
+      - m_Value: 0.59
+        m_Name: ParticleSize
+        m_Overridden: 1
+      - m_Value: 1.21
+        m_Name: WidthTrailsRatio
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: 682, y: 235.99988, z: 24.000156}
+      - m_Value: {x: 69.99998, y: 762.0004, z: 24.000553}
         m_Name: TargetToMove
         m_Overridden: 1
       - m_Value: {x: -140, y: -910.7462, z: -0.00037321}
@@ -83,10 +89,10 @@ VisualEffect:
       - m_Value: {x: 1.9143014, y: 12.533257, z: 9.478069}
         m_Name: Pos1
         m_Overridden: 1
-      - m_Value: {x: 1.58833, y: 13.76382, z: 8.890239}
+      - m_Value: {x: -0.49963853, y: 13.0135565, z: 9.646637}
         m_Name: Pos2
         m_Overridden: 1
-      - m_Value: {x: 0.80939907, y: 14.467206, z: 8.664359}
+      - m_Value: {x: -0.5718117, y: 13.654752, z: 8.940527}
         m_Name: Pos3
         m_Overridden: 1
       - m_Value: {x: -0.15724628, y: 14.397312, z: 7.2462893}
@@ -96,7 +102,10 @@ VisualEffect:
         m_Name: TargetPosition
         m_Overridden: 1
     m_Vector4f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 13.707956, y: 0.21553251, z: 7.9024014, w: 0}
+        m_Name: ColorGlow
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
@@ -306,7 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPos: {fileID: 7369423780592470469}
   impactObject: {fileID: 6670024902780076386}
-  lifeTime: 1.4
+  lifeTime: 0.5
 --- !u!1 &3195669047227471531
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,7 +374,7 @@ Transform:
   m_GameObject: {fileID: 3503133599267662020}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 76.29486, y: -192.38568, z: -177.1734}
+  m_LocalPosition: {x: 220.45886, y: -309.25366, z: -257.8546}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -396,7 +405,7 @@ Transform:
   m_GameObject: {fileID: 5035980594813908571}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 349.51407, y: 21.765015, z: -311.41034}
+  m_LocalPosition: {x: 265.1352, y: 270.12518, z: -290.37344}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -474,7 +483,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7182950762409305462}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 23.999886}
+  m_LocalPosition: {x: 0, y: 0, z: 23.999958}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -482,7 +491,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 682, y: 235.99977}
+  m_AnchoredPosition: {x: 70, y: 762}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7334560252763566908
@@ -510,7 +519,7 @@ Transform:
   m_GameObject: {fileID: 7334560252763566908}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -47, y: 286, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -532,15 +541,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5054407771118838370, guid: 52044c5f0f3b4fd4d85eee97823751b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 716.9644
+      value: 114
       objectReference: {fileID: 0}
     - target: {fileID: 5054407771118838370, guid: 52044c5f0f3b4fd4d85eee97823751b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 666.2002
+      value: 465
       objectReference: {fileID: 0}
     - target: {fileID: 5054407771118838370, guid: 52044c5f0f3b4fd4d85eee97823751b7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -30.40083
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 5054407771118838370, guid: 52044c5f0f3b4fd4d85eee97823751b7, type: 3}
       propertyPath: m_LocalRotation.w

@@ -9,7 +9,7 @@ public class TrailMovement : MonoBehaviour
     
     [SerializeField]private Transform targetPos;
     [SerializeField]private GameObject impactObject;
-    [SerializeField]public float lifeTime = 2f;
+    /*[SerializeField]public float lifeTime = 2f;*/
     
     private float myTime;
     private bool trailReleased = false;
@@ -26,7 +26,7 @@ public class TrailMovement : MonoBehaviour
         GetComponent<VisualEffect>().SetVector3("TargetPosition",targetPos.position);
         trailReleased = false;
         gameObject.SetActive(true);
-        GetComponent<VisualEffect>().SetFloat("Life",lifeTime);
+        /*GetComponent<VisualEffect>().SetFloat("Life",lifeTime);*/
         
         impactObject.transform.position  = targetPos.transform.position;
         GetComponent<VisualEffect>().Play();
@@ -43,7 +43,7 @@ public class TrailMovement : MonoBehaviour
         if (Input.GetKeyDown("space"))
         {
             ReleaseTrail();
-            myTime = lifeTime;
+            myTime = GetComponent<VisualEffect>().GetFloat("Life");
             trailReleased = true;
 
         }
