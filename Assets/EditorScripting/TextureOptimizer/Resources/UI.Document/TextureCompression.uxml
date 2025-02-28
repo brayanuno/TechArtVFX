@@ -1,5 +1,8 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
-    <engine:DropdownField label="Dropdown" choices="SelectTexture,AutoSelected" index="0" />
-    <editor:ObjectField label="TextureToBeModified" type="UnityEngine.Texture2D, UnityEngine.CoreModule" />
-    <engine:Button text="Modify Texture" />
+    <engine:Label text="Texture Optimizer" focusable="false" style="align-items: auto; justify-content: center; flex-wrap: nowrap; flex-direction: column-reverse; opacity: 1; display: flex; align-self: center; font-size: 20px;" />
+    <engine:DropdownField label="TextureSelection" choices="SelectTexture,AutoLoadLoadTexture" index="0" name="texture-selection" />
+    <editor:ObjectField label="Texture2D" type="UnityEngine.Texture2D, UnityEngine.CoreModule" name="texture-field" />
+    <engine:DropdownField label="WrapMode" name="wrap-mode" choices="Repeat,Clamp,Mirror,Mirror Once,Per Axis" index="0" />
+    <engine:DropdownField label="FilterMode" name="filter-Mode" choices="Point(No Filter),Bilinear,Trilinear" index="0" />
+    <engine:Button text="Modify Texture" name="modify-texture" style="border-top-width: 1px; justify-content: flex-end; align-items: center; padding-top: 3px; align-self: auto; flex-wrap: nowrap; flex-direction: column; -unity-text-align: middle-center; margin-bottom: 3px;" />
 </engine:UXML>

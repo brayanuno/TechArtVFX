@@ -5,9 +5,9 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-public class ObjectModifier : EditorWindow
+public class ObjectModifier : MonoBehaviour
 {
-    private static EditorWindow window;
+    /*private static EditorWindow window;
 
     public GameObject[] objectToReplace = null;
     public GameObject ObjectToReplace = null;
@@ -75,7 +75,7 @@ public class ObjectModifier : EditorWindow
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private static void Init()
     {
-        window = GetWindow(typeof(ObjectModifier), false, "Object Modifier");
+        /*window = GetWindow(typeof(ObjectModifier), false, "Object Modifier");#1#
         window.position = new Rect(100f, 100f, 100f, 100f);
         window.minSize = new Vector2(600f, 600f);
         window.Show();
@@ -107,7 +107,7 @@ public class ObjectModifier : EditorWindow
                 /*if (EditorUtility.DisplayDialog("Select folder(s)", "Select one or more folder from Panel to search From", "Select Folders"))
                 {
                     message = "Select one or more folders from the Project Panel to search from.";
-                }*/
+                }#1#
                 
 
                 Selection.activeObject = null;
@@ -153,5 +153,5 @@ public class ObjectModifier : EditorWindow
     void Update()
     {
         
-    }
+    }*/
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 public class CustomObjectDebugger : EditorWindow
 {
+    /*/*
     private GameObject selectedGameObject;
     private List<GameObject> filteredGameObjects = new List<GameObject>();
     
@@ -23,17 +24,19 @@ public class CustomObjectDebugger : EditorWindow
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+    #1#
         
     }
 
+    /*
     private void OnEnable()
     {
-        filteredGameObjects.AddRange(GameObject.FindObjectsOfType<GameObject>());
+        /*filteredGameObjects.AddRange(GameObject.FindObjectsOfType<GameObject>());#2#
     }
 
     private void OnGUI()
-    {
-        GUILayout.Label("Custom GameObject Debugger", EditorStyles.boldLabel);
+    {#1#
+        /*GUILayout.Label("Custom GameObject Debugger", EditorStyles.boldLabel);
         GUILayout.Label("Search & Filter", EditorStyles.boldLabel);
         searchQuery = EditorGUILayout.TextField("Search by Name", searchQuery);
         tagFilter = EditorGUILayout.TextField("Tag", tagFilter);
@@ -52,12 +55,12 @@ public class CustomObjectDebugger : EditorWindow
         else
         {
             GUILayout.Label("No GameObjects match the filter criteria", EditorStyles.boldLabel);
-        }
+        }#1#
     }
 
     private void FilteredGameObjects()
     {
-        filteredGameObjects.Clear();
+        /*filteredGameObjects.Clear();
         GameObject[] allGameObjects = GameObject.FindObjectsOfType<GameObject>();
         foreach (var go in allGameObjects)
         {
@@ -69,8 +72,9 @@ public class CustomObjectDebugger : EditorWindow
             {
                 filteredGameObjects.Add(go);
             }
-        }
+        }#1#
     }
+    */
     
 
     // Update is called once per frame
