@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 using Button = UnityEngine.UIElements.Button;
 using Object = UnityEngine.Object;
+using Slider = UnityEngine.UIElements.Slider;
+
 namespace NS
 {
     public class ImageAlphaEditor : EditorWindow
@@ -35,7 +37,7 @@ namespace NS
         {
             ImageAlphaEditor window = (ImageAlphaEditor)EditorWindow.GetWindow(typeof(ImageAlphaEditor));
             window.titleContent = new GUIContent("ImageAlphaEditor");
-            window.maxSize = new Vector2(320, 550);
+            window.maxSize = new Vector2(320, 500);
             window.minSize = window.maxSize;
             
         }
@@ -53,7 +55,7 @@ namespace NS
             textureOption = root.Q<DropdownField>("texture-option");
             alphaGradientField= root.Q<GradientField>();
             imagePreview = root.Q<VisualElement>("image-preview");
-            customTexValues = root.Q<VisualElement>("custom-tex-values");
+            customTexValues = root.Q<VisualElement>("custom-text-values");
             alphaSliderInt = root.Q<SliderInt>();
             exportButton = root.Q<Button>("export-button");
             
@@ -69,6 +71,7 @@ namespace NS
             textureOption.RegisterValueChangedCallback<string>(TextureOptionSelected);
             alphaSliderInt.RegisterValueChangedCallback<int>(AlphaSliderChanged);
             alphaInput.RegisterValueChangedCallback<int>(AlphaInputChanged);
+            alphaGradientField.RegisterValueChangedCallback<Gradient>(AlphaGradienChanged);
             tint.RegisterValueChangedCallback<Color>(TintChanged);
             exportButton.clicked += () => ExportImage(outputTexture);
             createTexButton.clicked += () => CreateTexture();
@@ -76,12 +79,19 @@ namespace NS
             exportButton.SetEnabled(false);
             imagePreview.style.backgroundImage = null;
             
-            /*
             TextureOptionSelected(null);
-            AlphaOptionSelected(null);*/
-            
+            AlphaOptionSelected(null);
+
+
+            alphaSliderInt.value = 255;
+
         }
-        
+
+        private void AlphaGradienChanged(ChangeEvent<Gradient> evt)
+        {
+            ApplyAlphaGradient();
+        }
+
         private void CreateTexture()
         {
             int textWidth = widthField.value;
@@ -97,6 +107,13 @@ namespace NS
 
             selectedTexture.Apply();
             
+            SetPreviewDimensions(textWidth, textHeight);
+
+            ApplyAlphaGradient();
+        }
+
+        private void SetPreviewDimensions(int textWidth, int textHeight)
+        {
             bool greaterWidth = (textWidth > textHeight);
             float xRatio = 1;
             float yRatio = 1;
@@ -111,12 +128,11 @@ namespace NS
             
             imagePreview.style.width = 300 * xRatio;
             imagePreview.style.height = 300 * yRatio;
-
-            ApplyAlphaGradient();
         }
+
         private void ExportImage(Texture2D texture2D)
         {
-            
+            //Opening Panel
             var path  = EditorUtility.SaveFilePanel(
                 "Save Edit Texture",
                 Application.dataPath + "/EditorScripting",
@@ -130,7 +146,7 @@ namespace NS
             {
                 return;
             }
-            
+            //Writing png to bytes
             File.WriteAllBytes(path, bytes);
             
             string pathString = path;
@@ -142,8 +158,6 @@ namespace NS
             EditorUtility.FocusProjectWindow();
             Selection.activeObject = (Texture2D)AssetDatabase.LoadAssetAtPath(filePath, typeof(Texture2D));
             Debug.Log("FilePath is + " + filePath);
-            
-            
         }
 
         private void ApplyAlphaGradient()
@@ -158,35 +172,76 @@ namespace NS
             imagePreview.style.backgroundImage = outputTexture;
         }
         
-        
-        
+
         private void TintChanged(ChangeEvent<Color> evt)
         {
-            throw new System.NotImplementedException();
+            ApplyAlphaGradient();
         }
 
         private void AlphaInputChanged(ChangeEvent<int> evt)
         {
-            throw new System.NotImplementedException();
+            
+            alphaSliderInt.SetValueWithoutNotify(evt.newValue);
+            ApplyAlphaGradient();
         }
 
         private void AlphaSliderChanged(ChangeEvent<int> evt)
         {
-            throw new System.NotImplementedException();
+        
+            alphaInput.SetValueWithoutNotify(evt.newValue);
+            ApplyAlphaGradient();
         }
 
         private void TextureOptionSelected(ChangeEvent<string> evt)
         {
-            throw new System.NotImplementedException();
+            //is the other one arr[1]
+            if (textureOption.value != textureOption.choices[0])
+            {
+                textureField.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
+                customTexValues.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
+            }
+            else
+            {
+                textureField.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
+                customTexValues.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
+            }
+
+            selectedTexture = null;
+            textureField.value = null;
+            imagePreview.style.backgroundImage = null;
+            
+            ApplyAlphaGradient();
         }
 
         private void TextureSelected(ChangeEvent<Object> evt)
         {
-            Debug.Log("Texture selected changed");
+            if (evt.newValue == null)
+            {
+                selectedTexture = null;
+                //Setting the texture on The Background
+                imagePreview.style.backgroundImage = null;
+                return;
+            }
+            
+            outputName = evt.newValue.name + "Modified";
+            selectedTexture = evt.newValue as Texture2D;
+            SetPreviewDimensions(selectedTexture.width, selectedTexture.height);
+            ApplyAlphaGradient();
         }
         private void AlphaOptionSelected(ChangeEvent<string> evt)
         {
-            throw new System.NotImplementedException();
+            if (alphaDropdown.value != alphaDropdown.choices[0])
+            {
+                alphaSliderInt.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
+                alphaGradientField.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
+            }
+            else
+            {
+                alphaSliderInt.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
+                alphaGradientField.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
+            }
+            ApplyAlphaGradient();
+
         }
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created

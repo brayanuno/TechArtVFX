@@ -6,10 +6,11 @@ using Vector2 = System.Numerics.Vector2;
 
 public class TrailMovement : MonoBehaviour
 {
+    [SerializeField] private GameObject driverTrail;
     
     [SerializeField]private Transform targetPos;
     [SerializeField]private GameObject impactObject;
-    /*[SerializeField]public float lifeTime = 2f;*/
+    [SerializeField] public float lifetimeEffect = 2f;
     
     private float myTime;
     private bool trailReleased = false;
@@ -22,14 +23,19 @@ public class TrailMovement : MonoBehaviour
     
     void ReleaseTrail()
     {
+        if (driverTrail is null)
+        {
+            return;
+        }
         impactObject.SetActive(false);
-        GetComponent<VisualEffect>().SetVector3("TargetPosition",targetPos.position);
+        driverTrail.GetComponent<VisualEffect>().SetVector3("TargetPosition",targetPos.position);
         trailReleased = false;
         gameObject.SetActive(true);
-        /*GetComponent<VisualEffect>().SetFloat("Life",lifeTime);*/
+        
+        driverTrail.GetComponent<VisualEffect>().SetFloat("Life",lifetimeEffect );
         
         impactObject.transform.position  = targetPos.transform.position;
-        GetComponent<VisualEffect>().Play();
+        driverTrail.GetComponent<VisualEffect>().Play();
     }
     public void SpawnImpactEffect()
     {
@@ -43,7 +49,7 @@ public class TrailMovement : MonoBehaviour
         if (Input.GetKeyDown("space"))
         {
             ReleaseTrail();
-            myTime = GetComponent<VisualEffect>().GetFloat("Life");
+            myTime = driverTrail.GetComponent<VisualEffect>().GetFloat("Life");
             trailReleased = true;
 
         }

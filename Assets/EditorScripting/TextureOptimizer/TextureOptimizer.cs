@@ -2,19 +2,22 @@ using Unity.Mathematics.Geometry;
 using UnityEditor;
 using UnityEngine;
 
-/*[CustomEditor(typeof(TextureImporter),  true)]
-public class TextureOptimizer : Editor
+/*[CustomEditor(typeof(TextureImporter),  true)]*/
+public class TextureOptimizer : EditorWindow
 {
     
-    public override void OnInspectorGUI()
+}
+
+    /*public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
         if (GUILayout.Button("Optimize Texture"))
         {
             SetMaxTextureSizeOptimizer();
-        }#1#
+        }
+    }*/
 
-    void SetMaxTextureSizeOptimizer()
+    /*void SetMaxTextureSizeOptimizer()
     {
         //Getting the path of selectedObject
         string path = AssetDatabase.GetAssetPath(Selection.activeObject);
@@ -51,18 +54,7 @@ public class TextureOptimizer : Editor
     {
         return (int)Mathf.Pow(2, (int)Mathf.Log(maxDimension -1,2) + 1);
         
-    }
-
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }*/
-/*}*/
+
+
+
