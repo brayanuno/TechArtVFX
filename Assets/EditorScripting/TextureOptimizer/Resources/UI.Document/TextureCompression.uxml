@@ -1,8 +1,20 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
-    <engine:Label text="Texture Optimizer" focusable="false" style="align-items: auto; justify-content: center; flex-wrap: nowrap; flex-direction: column-reverse; opacity: 1; display: flex; align-self: center; font-size: 20px;" />
-    <engine:DropdownField label="TextureSelection" choices="SelectTexture,AutoLoadLoadTexture" index="0" name="texture-selection" />
+    <engine:VisualElement style="flex-grow: 1; max-height: 33px; min-height: 38px; visibility: visible; -unity-text-align: upper-left; white-space: pre; height: auto;">
+        <editor:ToolbarMenu text="dwafwafw" style="max-width: 91px;" />
+    </engine:VisualElement>
+    <engine:Label text="Auto Texture Optimizer" focusable="false" style="align-items: auto; justify-content: center; flex-wrap: nowrap; flex-direction: column-reverse; opacity: 1; display: flex; align-self: center; font-size: 20px;" />
+    <engine:DropdownField label="Texture Type" choices="Sprite 2D,Default Textures" index="0" name="texture-selection" />
     <editor:ObjectField label="Texture2D" type="UnityEngine.Texture2D, UnityEngine.CoreModule" name="texture-field" />
-    <engine:DropdownField label="WrapMode" name="wrap-mode" choices="Repeat,Clamp,Mirror,Mirror Once,Per Axis" index="0" />
-    <engine:DropdownField label="FilterMode" name="filter-Mode" choices="Point(No Filter),Bilinear,Trilinear" index="0" />
-    <engine:Button text="Modify Texture" name="modify-texture" style="border-top-width: 1px; justify-content: flex-end; align-items: center; padding-top: 3px; align-self: auto; flex-wrap: nowrap; flex-direction: column; -unity-text-align: middle-center; margin-bottom: 3px;" />
+    <engine:Label text="This is Message to the user" name="message-user" style="justify-content: flex-end; align-self: center;" />
+    <engine:VisualElement name="auto-load-section" style="flex-grow: 1; opacity: 1; max-height: 100px; display: none; visibility: visible; height: auto; -unity-text-align: upper-left; overflow: visible; min-height: 100px; justify-content: flex-start; flex-direction: column; align-self: stretch; align-content: stretch;">
+        <engine:Label text="AutoLoad" style="justify-content: flex-end; align-self: center; font-size: 16px; margin-bottom: 5px; -unity-text-align: middle-center; align-items: auto; align-content: center; padding-bottom: -1px; margin-top: 5px;" />
+        <editor:ObjectField type="UnityEngine.Texture2D, UnityEngine.CoreModule" name="auto-texture-field" style="-unity-text-align: upper-center;" />
+        <engine:Button text="Load Texture" name="auto-load-texture" />
+    </engine:VisualElement>
+    <engine:VisualElement name="setting-section" style="flex-grow: 1; min-height: 100px; max-height: 120px; height: auto; border-top-width: 5px; background-image: none; -unity-background-image-tint-color: rgba(225, 225, 225, 0.28); background-color: rgba(255, 255, 255, 0);">
+        <engine:Label text="Settings" name="settings" style="-unity-text-align: upper-center; font-size: 17px; overflow: hidden; display: flex; border-bottom-width: 5px;" />
+        <engine:DropdownField label="WrapMode" name="wrap-mode" choices="Repeat,Clamp,Mirror,Mirror Once,Per Axis" index="0" style="visibility: visible; display: flex; font-size: 12px;" />
+        <engine:DropdownField label="FilterMode" name="filter-mode" choices="Point(No Filter),Bilinear,Trilinear" index="0" />
+    </engine:VisualElement>
+    <engine:Button text="Optimize Texture" name="modify-texture" style="border-top-width: 1px; justify-content: flex-end; align-items: center; padding-top: 3px; align-self: stretch; flex-wrap: nowrap; flex-direction: column; -unity-text-align: middle-center; margin-bottom: 3px; font-size: 16px; align-content: center;" />
 </engine:UXML>
