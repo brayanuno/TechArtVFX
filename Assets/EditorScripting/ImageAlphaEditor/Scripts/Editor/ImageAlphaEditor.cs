@@ -151,6 +151,7 @@ namespace NS
             
             string pathString = path;
             int assetIndex = pathString.IndexOf("Assets" , StringComparison.Ordinal);
+            
             //completedPath
             string filePath = pathString.Substring(assetIndex, path.Length - assetIndex);
             AssetDatabase.ImportAsset(filePath);

@@ -7,6 +7,7 @@ using UnityEditor.Rendering;
 public class MonsterDataEditor : Editor
 {
    
+    /*
     public SerializedProperty name;
     public SerializedProperty monsterType; 
     public SerializedProperty chanceToDropItem;
@@ -113,7 +114,7 @@ public class MonsterDataEditor : Editor
 
            
 
-        ///*after all change apply modified*/
+        ///*after all change apply modified#1#
         serializedObject.ApplyModifiedProperties();
 
     }
@@ -132,6 +133,7 @@ public class MonsterDataEditor : Editor
         speed.intValue = UnityEngine.Random.Range(1, 50);
         health.intValue = UnityEngine.Random.Range(1, 50);
     }
+    */
 
 
 

@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d67aa8b2-3548-4475-90b8-7242b9fae7e4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TechArtVFX/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TechArtVFX/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BrayanAssets/Effects/GoldenDragon/ActivateDragon/tex/icon=Golden-Dragon 1.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BrayanAssets/Effects/GoldenDragon/ActivateDragon/tex/icon=Golden-Dragon 1.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BrayanAssets/Scripts/Monster/Editor/MonsterDataEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BrayanAssets/Scripts/Monster/Editor/MonsterDataEditor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BrayanAssets/ThunderLord_2020.1_URP/Assembly-CSharp-Editor.csproj.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BrayanAssets/ThunderLord_2020.1_URP/Assembly-CSharp-firstpass.csproj.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BrayanAssets/ThunderLord_2020.1_URP/Assembly-CSharp.csproj.meta" beforeDir="false" />
@@ -48,12 +48,9 @@
       <change beforePath="$PROJECT_DIR$/Assets/BrayanAssets/ThunderLord_2020.1_URP/VFX_FPSProjectiles.sln.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BrayanAssets/ThunderLord_2020.1_URP/Valorant_SageWall_URP.sln.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BrayanAssets/ThunderLord_2020.1_URP/com.unity.cinemachine.editor.csproj.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EditorScripting/ObjectModifier/CustomObjectDebugger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EditorScripting/ObjectModifier/CustomObjectDebugger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EditorScripting/ObjectModifier/ObjectModifier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EditorScripting/ObjectModifier/ObjectModifier.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EditorScripting/ImageAlphaEditor/Scripts/Editor/ImageAlphaEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EditorScripting/ImageAlphaEditor/Scripts/Editor/ImageAlphaEditor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/EditorScripting/TextureOptimizer/Resources/UI.Document/TextureCompression.uxml" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EditorScripting/TextureOptimizer/Resources/UI.Document/TextureCompression.uxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EditorScripting/TextureOptimizer/TextureOptimizer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EditorScripting/TextureOptimizer/TextureOptimizer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EditorScripting/TextureOptimizer/icon=Golden-Dragon 1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EditorScripting/TextureOptimizer/icon=Golden-Dragon 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EditorScripting/TextureOptimizer/Scripts/Editor/TextureOptimizer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EditorScripting/TextureOptimizer/Scripts/Editor/TextureOptimizer.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,19 +71,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Standalone Player.Start Unity">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.22f1\Editor\Unity.exe" />
@@ -140,7 +137,9 @@
       <option name="presentableId" value="Default" />
       <updated>1740715405110</updated>
       <workItem from="1740715407115" duration="3000" />
-      <workItem from="1740715696225" duration="6642000" />
+      <workItem from="1740715696225" duration="6842000" />
+      <workItem from="1740860392715" duration="2916000" />
+      <workItem from="1740889466274" duration="14446000" />
     </task>
     <servers />
   </component>

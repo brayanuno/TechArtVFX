@@ -1,20 +1,21 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
-    <engine:VisualElement style="flex-grow: 1; max-height: 33px; min-height: 38px; visibility: visible; -unity-text-align: upper-left; white-space: pre; height: auto;">
+    <engine:VisualElement style="flex-grow: 1; max-height: 19px; min-height: 15px; visibility: visible; -unity-text-align: upper-left; white-space: pre; height: auto;">
         <editor:ToolbarMenu text="dwafwafw" style="max-width: 91px;" />
     </engine:VisualElement>
     <engine:Label text="Auto Texture Optimizer" focusable="false" style="align-items: auto; justify-content: center; flex-wrap: nowrap; flex-direction: column-reverse; opacity: 1; display: flex; align-self: center; font-size: 20px;" />
-    <engine:DropdownField label="Texture Type" choices="Sprite 2D,Default Textures" index="0" name="texture-selection" />
+    <engine:DropdownField label="Import Type:" choices="Single,Multiple Textures" index="0" name="texture-selection" />
     <editor:ObjectField label="Texture2D" type="UnityEngine.Texture2D, UnityEngine.CoreModule" name="texture-field" />
     <engine:Label text="This is Message to the user" name="message-user" style="justify-content: flex-end; align-self: center;" />
-    <engine:VisualElement name="auto-load-section" style="flex-grow: 1; opacity: 1; max-height: 100px; display: none; visibility: visible; height: auto; -unity-text-align: upper-left; overflow: visible; min-height: 100px; justify-content: flex-start; flex-direction: column; align-self: stretch; align-content: stretch;">
-        <engine:Label text="AutoLoad" style="justify-content: flex-end; align-self: center; font-size: 16px; margin-bottom: 5px; -unity-text-align: middle-center; align-items: auto; align-content: center; padding-bottom: -1px; margin-top: 5px;" />
-        <editor:ObjectField type="UnityEngine.Texture2D, UnityEngine.CoreModule" name="auto-texture-field" style="-unity-text-align: upper-center;" />
-        <engine:Button text="Load Texture" name="auto-load-texture" />
-    </engine:VisualElement>
-    <engine:VisualElement name="setting-section" style="flex-grow: 1; min-height: 100px; max-height: 120px; height: auto; border-top-width: 5px; background-image: none; -unity-background-image-tint-color: rgba(225, 225, 225, 0.28); background-color: rgba(255, 255, 255, 0);">
-        <engine:Label text="Settings" name="settings" style="-unity-text-align: upper-center; font-size: 17px; overflow: hidden; display: flex; border-bottom-width: 5px;" />
+    <engine:Button text="Load Multiple Textures" name="load-multiple-textures" style="align-items: stretch; max-width: initial; align-self: flex-start; text-overflow: clip; flex-direction: column; justify-content: flex-start; -unity-text-align: middle-center; width: 100%;" />
+    <engine:VisualElement name="setting-section" style="flex-grow: 1; min-height: 85px; max-height: 87px; height: auto; border-top-width: 5px; background-image: none; -unity-background-image-tint-color: rgba(225, 225, 225, 0.28); background-color: rgba(255, 255, 255, 0);">
+        <engine:Foldout text="InfoTexture" name="InfoTexture" />
+        <engine:Label text="Optimized Settings" name="settings" style="-unity-text-align: upper-center; font-size: 17px; overflow: hidden; display: flex; border-bottom-width: 5px;" />
         <engine:DropdownField label="WrapMode" name="wrap-mode" choices="Repeat,Clamp,Mirror,Mirror Once,Per Axis" index="0" style="visibility: visible; display: flex; font-size: 12px;" />
         <engine:DropdownField label="FilterMode" name="filter-mode" choices="Point(No Filter),Bilinear,Trilinear" index="0" />
     </engine:VisualElement>
     <engine:Button text="Optimize Texture" name="modify-texture" style="border-top-width: 1px; justify-content: flex-end; align-items: center; padding-top: 3px; align-self: stretch; flex-wrap: nowrap; flex-direction: column; -unity-text-align: middle-center; margin-bottom: 3px; font-size: 16px; align-content: center;" />
+    <engine:VisualElement name="load-textures" focusable="false" style="flex-grow: 1; opacity: 1; max-height: 15px; display: flex; visibility: visible; height: 26px; -unity-text-align: upper-left; overflow: visible; min-height: 26px; justify-content: flex-start; flex-direction: row; align-self: stretch; align-content: stretch; flex-basis: 313px;">
+        <engine:TextField placeholder-text="Assets/EditorScripting/TextureOptimizer/Resources/UI.Document/TextureCompression.uxml" name="Folder" style="width: 235px; height: auto; font-size: 10px; -unity-font-style: bold; -unity-text-align: upper-right;" />
+        <engine:Button text="FolderOutput" />
+    </engine:VisualElement>
 </engine:UXML>
