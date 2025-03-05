@@ -814,7 +814,7 @@ MonoBehaviour:
   m_Children:
   - {fileID: 8926484042661614613}
   - {fileID: 8926484042661614620}
-  m_UIPosition: {x: 941, y: 2100}
+  m_UIPosition: {x: 941, y: 1865}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -1170,7 +1170,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.Vector, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"vector":{"x":0.0,"y":-7.28000020980835,"z":0.0}}'
+      m_SerializableObject: '{"vector":{"x":0.0,"y":2.7899999618530275,"z":0.0}}'
     m_Space: 0
   m_Property:
     name: Force
@@ -3867,7 +3867,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 588, y: 2220}
+  m_UIPosition: {x: 498, y: 2231}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -4276,7 +4276,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children:
   - {fileID: 8926484042661614764}
-  m_UIPosition: {x: 955, y: 2416}
+  m_UIPosition: {x: 941, y: 2501}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -9881,7 +9881,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615190}
   m_ExposedName: Color01
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 5
   m_Category: Colors
   m_Min:
     m_Type:
@@ -10098,7 +10098,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615196}
   m_ExposedName: Color02
   m_Exposed: 1
-  m_Order: 0
+  m_Order: 1
   m_Category: Colors
   m_Min:
     m_Type:
@@ -10315,7 +10315,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615202}
   m_ExposedName: Color03
   m_Exposed: 1
-  m_Order: 0
+  m_Order: 2
   m_Category: Colors
   m_Min:
     m_Type:
@@ -10532,7 +10532,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615208}
   m_ExposedName: Color04
   m_Exposed: 1
-  m_Order: 0
+  m_Order: 3
   m_Category: Colors
   m_Min:
     m_Type:
@@ -10749,7 +10749,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615214}
   m_ExposedName: Color05
   m_Exposed: 1
-  m_Order: 0
+  m_Order: 4
   m_Category: Colors
   m_Min:
     m_Type:
@@ -11441,7 +11441,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: -1.89
+      m_SerializableObject: -1.38
     m_Space: -1
   m_Property:
     name: Min
@@ -11475,7 +11475,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: -2.29
+      m_SerializableObject: 1.3
     m_Space: -1
   m_Property:
     name: Max
