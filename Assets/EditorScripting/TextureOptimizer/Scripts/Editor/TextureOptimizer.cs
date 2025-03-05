@@ -20,6 +20,9 @@ public class TextureOptimizer : EditorWindow
     private ObjectField objectField;
     private ObjectField autoTextureField;
     private Texture2D currentTexture;
+
+    private TextField outputText;
+    
     private DropdownField wrapModeDropDown;
     private DropdownField filterModeDropDown;
     private Label messageUser;
@@ -32,6 +35,10 @@ public class TextureOptimizer : EditorWindow
     
     private Texture2D loadedTexture;
     
+    private VisualElement folderOutput;
+    private Foldout textureSettings;
+    private VisualElement settingsContainer;
+    
     [MenuItem("Tools/TextureOptimizer")]
     public static void OpenEditorWindow()
     {
@@ -39,6 +46,7 @@ public class TextureOptimizer : EditorWindow
         window.titleContent = new GUIContent("TextureOptimizer");
         window.maxSize = new Vector2(350, 450);
         window.minSize = window.maxSize;
+        
     }
 
     private void CreateGUI()
@@ -52,27 +60,55 @@ public class TextureOptimizer : EditorWindow
         selectTextureOptions = root.Q<DropdownField>("texture-selection");
         objectField = root.Q<ObjectField>("texture-field");
         autoTextureField = root.Q<ObjectField>("auto-texture-field");
-        optimizeTextureButton = root.Q<Button>("modify-texture");
+        
+        folderOutput = root.Q<VisualElement>("folder-output");
 
         wrapModeDropDown = root.Q<DropdownField>("wrap-mode");
         filterModeDropDown = root.Q<DropdownField>("filter-mode");
         messageUser = root.Q<Label>("message-user");
+        
+        /*Buttons*/
+        optimizeTextureButton = root.Q<Button>("modify-texture");
         loadMultipleTexturesButton = root.Q<Button>("load-multiple-textures");
         
         autoLoadSection = root.Q<VisualElement>("auto-load-section");
-        
+        textureSettings = root.Q<Foldout>("texture-settings");
+        settingsContainer = root.Q("settings-container");
         /*Assign CallBacks*/
         objectField.RegisterValueChangedCallback<Object>(evt => TextureSelected(evt));
         selectTextureOptions.RegisterValueChangedCallback<string>(TextureSelectionOptions);
-        
+        textureSettings.RegisterValueChangedCallback(FoldoutChanged);
         optimizeTextureButton.clicked += () => OptimizeTexture();
         loadMultipleTexturesButton.clicked += () => LoadMultipleTextures();
         
         /*starting CallBacks*/
         currentTexture = null;
+        Initializer();
         DisplayMessage();
-
+        
     }
+
+    private void FoldoutChanged(ChangeEvent<bool> evt)
+    {
+        if (evt.newValue != true)
+        {
+            settingsContainer.style.display = DisplayStyle.None;
+        }
+        else
+        {
+            settingsContainer.style.display = DisplayStyle.Flex;
+        }
+    }
+
+    private void Initializer()
+    {
+       optimizeTextureButton.SetEnabled(false);
+       loadMultipleTexturesButton.style.display = DisplayStyle.None;
+       folderOutput.style.display = DisplayStyle.None;
+       textureSettings.value = false;
+       settingsContainer.style.display = DisplayStyle.None;
+    }
+
 
     private void LoadMultipleTextures()
     {  
@@ -187,32 +223,44 @@ public class TextureOptimizer : EditorWindow
 
     private void TextureSelectionOptions(ChangeEvent<string> evt)
     {
-        /*if (selectTextureOptions.value == selectTextureOptions.choices[0] )
+        if (selectTextureOptions.value == selectTextureOptions.choices[0] )
         {
-            autoLoadSection.style.display = DisplayStyle.None;
+
             objectField.style.display = DisplayStyle.Flex;
+            messageUser.style.display = DisplayStyle.Flex;
+            
+            loadMultipleTexturesButton.style.display = DisplayStyle.None;
+            folderOutput.style.display = DisplayStyle.None;
+            
         }
         else
         {
             objectField.style.display = DisplayStyle.None;
-            autoLoadSection.style.display = DisplayStyle.Flex;
-        }*/
+            messageUser.style.display = DisplayStyle.None;
+            
+            loadMultipleTexturesButton.style.display = DisplayStyle.Flex;
+            folderOutput.style.display = DisplayStyle.Flex;
+        }
     }
+    /*Button-OptimizeTexture-Action => Optimize The texture ON Click*/
     private void OptimizeTexture()
     {
         if (currentTexture == null)
         {
             return;
         }
-        
+        /* Loading Asset*/
         string assetPath = AssetDatabase.GetAssetPath(currentTexture);
         TextureImporter importer = (TextureImporter)TextureImporter.GetAtPath(assetPath);
         
-        /* settings assets */
+        /* CustomSettings */
         importer.wrapMode = TextureWrapMode.Repeat;
         importer.filterMode = FilterMode.Point; 
         importer.spriteImportMode = SpriteImportMode.Single;
         importer.textureCompression = TextureImporterCompression.CompressedHQ;
+        
+        
+        
         importer = SetMaxTextureSizeOptimizer(importer);
         importer.spriteImportMode = SpriteImportMode.Single;
         importer.textureType = TextureImporterType.Sprite;
@@ -220,6 +268,7 @@ public class TextureOptimizer : EditorWindow
         /* saving and reimporting assets */
         EditorUtility.SetDirty(importer);
         importer.SaveAndReimport(); 
+        Debug.Log("Optimized Successfully");
     }
 
     private TextureImporter SetMaxTextureSizeOptimizer(TextureImporter importer)
@@ -230,8 +279,7 @@ public class TextureOptimizer : EditorWindow
         importer.GetSourceTextureWidthAndHeight(out height, out width);
         int maxDimension = Mathf.Max(width, height);
         
-        TextureImporterSettings textureImporterSettings = new TextureImporterSettings();
-        /*textureImporterSettings.maxTextureSize = CalculateMaxTextureSizeOptimizer(maxDimension);*/
+
         importer.maxTextureSize = CalculateMaxTextureSizeOptimizer(maxDimension);
         //save importer
         
@@ -248,15 +296,16 @@ public class TextureOptimizer : EditorWindow
 
     private void TextureSelected(ChangeEvent<Object> evt)
     {
-
         if (evt.newValue !=null)
         {
+            optimizeTextureButton.SetEnabled(true);
             currentTexture = evt.newValue as Texture2D;
             messageUser.style.display =  DisplayStyle.None;
             return;
         }
         else
         {
+            optimizeTextureButton.SetEnabled(false);
             DisplayMessage();
         }
     }
