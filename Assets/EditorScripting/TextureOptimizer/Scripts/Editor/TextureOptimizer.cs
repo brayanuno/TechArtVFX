@@ -20,13 +20,14 @@ public class TextureOptimizer : EditorWindow
     private ObjectField objectField;
     private ObjectField autoTextureField;
     private Texture2D currentTexture;
-
+    private Label validateText;
+    
     private TextField outputText;
     
     private DropdownField wrapModeDropDown;
     private DropdownField filterModeDropDown;
     private Label messageUser;
-    
+    private Label news;
     private VisualElement autoLoadSection;
     /*private VisualElement settingOption;*/
     
@@ -60,6 +61,7 @@ public class TextureOptimizer : EditorWindow
         selectTextureOptions = root.Q<DropdownField>("texture-selection");
         objectField = root.Q<ObjectField>("texture-field");
         autoTextureField = root.Q<ObjectField>("auto-texture-field");
+        validateText = root.Q<Label>("validate-text");
         
         folderOutput = root.Q<VisualElement>("folder-output");
 
@@ -85,7 +87,7 @@ public class TextureOptimizer : EditorWindow
         currentTexture = null;
         Initializer();
         DisplayMessage();
-        
+
     }
 
     private void FoldoutChanged(ChangeEvent<bool> evt)
@@ -107,6 +109,9 @@ public class TextureOptimizer : EditorWindow
        folderOutput.style.display = DisplayStyle.None;
        textureSettings.value = false;
        settingsContainer.style.display = DisplayStyle.None;
+       validateText.text = "These controls were created using C# code.           Passed  " +
+                           "fwawafwawadfwafawfwafwaf    " ;
+       validateText.text += "wfa";
     }
 
 
