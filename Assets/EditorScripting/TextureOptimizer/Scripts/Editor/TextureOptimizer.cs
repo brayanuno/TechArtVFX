@@ -11,7 +11,7 @@ using UnityEngine.UIElements;
 using Button = UnityEngine.UIElements.Button;
 using Debug = UnityEngine.Debug;
 using Object = UnityEngine.Object;
-using Slider = UnityEngine.UIElements.Slider;
+
 
 /*[CustomEditor(typeof(TextureImporter),  true)]*/
 public class TextureOptimizer : EditorWindow
@@ -26,7 +26,9 @@ public class TextureOptimizer : EditorWindow
     
     private DropdownField wrapModeDropDown;
     private DropdownField filterModeDropDown;
+    
     private Label messageUser;
+    
     private Label news;
     private VisualElement autoLoadSection;
     /*private VisualElement settingOption;*/
