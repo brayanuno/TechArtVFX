@@ -11,8 +11,12 @@ using UnityEngine.UIElements;
 using Button = UnityEngine.UIElements.Button;
 using Debug = UnityEngine.Debug;
 using Object = UnityEngine.Object;
+<<<<<<< HEAD
 using Slider = UnityEngine.UIElements.Slider;
 using Toggle = UnityEngine.UIElements.Toggle;
+=======
+
+>>>>>>> c9578f0514b5d7e18a43a472bd927a3c40df7ca4
 
 /*[CustomEditor(typeof(TextureImporter),  true)]*/
 public class TextureOptimizer : EditorWindow
@@ -38,6 +42,25 @@ public class TextureOptimizer : EditorWindow
     private ObjectField autoTextureField;
     /*Textures 2d*/
     private Texture2D currentTexture;
+<<<<<<< HEAD
+=======
+    private Label validateText;
+    
+    private TextField outputText;
+    
+    private DropdownField wrapModeDropDown;
+    private DropdownField filterModeDropDown;
+    
+    private Label messageUser;
+    
+    private Label news;
+    private VisualElement autoLoadSection;
+    /*private VisualElement settingOption;*/
+    
+    private Button optimizeTextureButton;
+    private Button loadMultipleTexturesButton;
+    
+>>>>>>> c9578f0514b5d7e18a43a472bd927a3c40df7ca4
     private Texture2D loadedTexture;
     
     /*Text*/
