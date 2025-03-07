@@ -12,33 +12,55 @@ using Button = UnityEngine.UIElements.Button;
 using Debug = UnityEngine.Debug;
 using Object = UnityEngine.Object;
 using Slider = UnityEngine.UIElements.Slider;
+using Toggle = UnityEngine.UIElements.Toggle;
 
 /*[CustomEditor(typeof(TextureImporter),  true)]*/
 public class TextureOptimizer : EditorWindow
 {
+    /*DropDowns*/
     private DropdownField selectTextureOptions;
+    
+    /*SettingsDropDown*/
+    private DropdownField textureTypeOptions;
+    private DropdownField textureSpriteMode;
+    private DropdownField textureFilterMode;
+    private DropdownField compressionMode;
+    private Toggle rgbCheck;
+    private Toggle optimizeChecker;
+    private IntegerField pixelsUnit;
+    
+    /*labels text validator */
+    private Label validateTextOutput;
+    
+    
+    /*Objects Fields;*/
     private ObjectField objectField;
     private ObjectField autoTextureField;
+    /*Textures 2d*/
     private Texture2D currentTexture;
-    private Label validateText;
-    
-    private TextField outputText;
-    
-    private DropdownField wrapModeDropDown;
-    private DropdownField filterModeDropDown;
-    private Label messageUser;
-    private Label news;
-    private VisualElement autoLoadSection;
-    /*private VisualElement settingOption;*/
-    
-    private Button optimizeTextureButton;
-    private Button loadMultipleTexturesButton;
-    
     private Texture2D loadedTexture;
     
+    /*Text*/
+    private TextField outputText;
+    private Label messageUser;
+
+
+    /*Buttons*/
+    private Button optimizeTextureButton;
+    private Button loadMultipleTexturesButton;
+    private Button validateTextureButton;
+    
+    /*Visual Elements*/
+    private VisualElement autoLoadSection;
     private VisualElement folderOutput;
     private Foldout textureSettings;
     private VisualElement settingsContainer;
+    
+    /*ValuesElements*/
+    private int currentTextureTypeOption;
+
+    private LibrarySettings librarySettings;
+    
     
     [MenuItem("Tools/TextureOptimizer")]
     public static void OpenEditorWindow()
@@ -61,35 +83,41 @@ public class TextureOptimizer : EditorWindow
         selectTextureOptions = root.Q<DropdownField>("texture-selection");
         objectField = root.Q<ObjectField>("texture-field");
         autoTextureField = root.Q<ObjectField>("auto-texture-field");
-        validateText = root.Q<Label>("validate-text");
-        
+        validateTextOutput = root.Q<Label>("validate-text");
+        textureTypeOptions = root.Q<DropdownField>("texture-type");
         folderOutput = root.Q<VisualElement>("folder-output");
-
-        wrapModeDropDown = root.Q<DropdownField>("wrap-mode");
-        filterModeDropDown = root.Q<DropdownField>("filter-mode");
+        textureSpriteMode = root.Q<DropdownField>("texture-sprite-mode");
+        textureFilterMode = root.Q<DropdownField>("texture-filter-mode");
+        autoLoadSection = root.Q<VisualElement>("auto-load-section");
+        textureSettings = root.Q<Foldout>("texture-settings");
+        settingsContainer = root.Q("settings-container");
         messageUser = root.Q<Label>("message-user");
+        compressionMode = root.Q<DropdownField>("compression-mode");
+        rgbCheck = root.Q<Toggle>("rgb-check");
+        pixelsUnit = root.Q<IntegerField>("pixels-unit");
+        optimizeChecker = root.Q<Toggle>("optimize-checker");
+        validateTextureButton = root.Q<Button>("validate-texture");
         
         /*Buttons*/
         optimizeTextureButton = root.Q<Button>("modify-texture");
         loadMultipleTexturesButton = root.Q<Button>("load-multiple-textures");
         
-        autoLoadSection = root.Q<VisualElement>("auto-load-section");
-        textureSettings = root.Q<Foldout>("texture-settings");
-        settingsContainer = root.Q("settings-container");
+        
         /*Assign CallBacks*/
         objectField.RegisterValueChangedCallback<Object>(evt => TextureSelected(evt));
         selectTextureOptions.RegisterValueChangedCallback<string>(TextureSelectionOptions);
         textureSettings.RegisterValueChangedCallback(FoldoutChanged);
         optimizeTextureButton.clicked += () => OptimizeTexture();
         loadMultipleTexturesButton.clicked += () => LoadMultipleTextures();
+        validateTextureButton.clicked += () => ValidateTexture();
         
         /*starting CallBacks*/
         currentTexture = null;
+        librarySettings = new LibrarySettings();
         Initializer();
-        DisplayMessage();
-
+        
     }
-
+    
     private void FoldoutChanged(ChangeEvent<bool> evt)
     {
         if (evt.newValue != true)
@@ -109,12 +137,13 @@ public class TextureOptimizer : EditorWindow
        folderOutput.style.display = DisplayStyle.None;
        textureSettings.value = false;
        settingsContainer.style.display = DisplayStyle.None;
-       validateText.text = "These controls were created using C# code.           Passed  " +
-                           "fwawafwawadfwafawfwafwaf    " ;
-       validateText.text += "wfa";
+       DisplayMessage();
+       
+       textureTypeOptions.index = currentTextureTypeOption;
+       textureTypeOptions.index = 2;
+       
     }
-
-
+    
     private void LoadMultipleTextures()
     {  
         var path = EditorUtility.OpenFilePanel(                             
@@ -123,14 +152,12 @@ public class TextureOptimizer : EditorWindow
             "png"                                                           
         );                                                                  
         
-        
         /*only look if file is selected*/
         if (path.Length != 0)
         {
             LoadTexture(path);
         }
     }
-
     private void OnGUI()
     {
         
@@ -141,13 +168,9 @@ public class TextureOptimizer : EditorWindow
         byte[] fileData = File.ReadAllBytes(path);
         string fileName = Path.GetFileName(path);
         
-        
         string assetPath = Path.Combine(GetSelectedFolderPath(),fileName);
-        
-        
         //Writing png to bytes
         File.WriteAllBytes(assetPath, fileData);
-        
         
         /*AssetDatabase.ImportAsset(assetPath);*/
         AssetDatabase.Refresh();
@@ -155,6 +178,7 @@ public class TextureOptimizer : EditorWindow
         
         Selection.activeObject = (Texture2D)AssetDatabase.LoadAssetAtPath(assetPath, typeof(Texture2D));  
         Debug.Log($"File imported Successfull to: {assetPath}");
+        
         return;
         
         loadedTexture = new Texture2D(256, 256);
@@ -178,8 +202,12 @@ public class TextureOptimizer : EditorWindow
         Selection.activeObject = (Texture2D)AssetDatabase.LoadAssetAtPath(path, typeof(Texture2D));
         
         Debug.Log("Texture loaded: " + path);
-    } 
-    
+    }
+
+    private void TextureValidator()
+    {
+        
+    }
     private string GetSelectedFolderPath()
     {
         if (Selection.activeObject != null)
@@ -210,14 +238,11 @@ public class TextureOptimizer : EditorWindow
     {
         Object selectedAsset = Selection.activeObject;
         autoTextureField.value = selectedAsset;
-        
-
         currentTexture = selectedAsset as Texture2D;
         
         string assetPath = AssetDatabase.GetAssetPath(currentTexture);
         
     }
-
     private void DisplayMessage()
     {
         messageUser.style.display =  DisplayStyle.Flex;
@@ -225,7 +250,6 @@ public class TextureOptimizer : EditorWindow
         messageUser.text = "Please Selected A texture";
     }
     
-
     private void TextureSelectionOptions(ChangeEvent<string> evt)
     {
         if (selectTextureOptions.value == selectTextureOptions.choices[0] )
@@ -254,51 +278,31 @@ public class TextureOptimizer : EditorWindow
         {
             return;
         }
+        
         /* Loading Asset*/
         string assetPath = AssetDatabase.GetAssetPath(currentTexture);
+        
         TextureImporter importer = (TextureImporter)TextureImporter.GetAtPath(assetPath);
         
         /* CustomSettings */
-        importer.wrapMode = TextureWrapMode.Repeat;
-        importer.filterMode = FilterMode.Point; 
-        importer.spriteImportMode = SpriteImportMode.Single;
-        importer.textureCompression = TextureImporterCompression.CompressedHQ;
+        importer = librarySettings.SetTextureType(importer, textureTypeOptions.index);
+        importer = librarySettings.SetSpriteMode(importer, textureSpriteMode.index);
+        importer = librarySettings.SetFilterMode(importer, textureFilterMode.index);
+        importer = librarySettings.SetCompression(importer, compressionMode.index);
+        importer = librarySettings.SetRGB(importer, rgbCheck.value);
+        importer = librarySettings.SetPixelUnit(importer,pixelsUnit.value);
+
+        if (optimizeChecker.value)
+        {
+            importer = librarySettings.SetMaxTextureSizeOptimizer(importer); 
+        }
         
-        
-        
-        importer = SetMaxTextureSizeOptimizer(importer);
-        importer.spriteImportMode = SpriteImportMode.Single;
-        importer.textureType = TextureImporterType.Sprite;
-        
-        /* saving and reimporting assets */
+        /* Save and Reimport */
         EditorUtility.SetDirty(importer);
         importer.SaveAndReimport(); 
-        Debug.Log("Optimized Successfully");
+
     }
-
-    private TextureImporter SetMaxTextureSizeOptimizer(TextureImporter importer)
-    {
-        int height;
-        int width;
-        
-        importer.GetSourceTextureWidthAndHeight(out height, out width);
-        int maxDimension = Mathf.Max(width, height);
-        
-
-        importer.maxTextureSize = CalculateMaxTextureSizeOptimizer(maxDimension);
-        //save importer
-        
-        /*//read Textures from importer
-        importer.ReadTextureSettings(textureImporterSettings);*/
-        return importer;
-    }
-
-    private int CalculateMaxTextureSizeOptimizer(int maxDimension)
-    {
-        return (int)Mathf.Pow(2, (int)Mathf.Log(maxDimension -1,2) + 1);
-        
-    }
-
+    
     private void TextureSelected(ChangeEvent<Object> evt)
     {
         if (evt.newValue !=null)
@@ -306,18 +310,86 @@ public class TextureOptimizer : EditorWindow
             optimizeTextureButton.SetEnabled(true);
             currentTexture = evt.newValue as Texture2D;
             messageUser.style.display =  DisplayStyle.None;
+            validateTextureButton.SetEnabled(true);
             return;
         }
         else
         {
             optimizeTextureButton.SetEnabled(false);
+            validateTextureButton.SetEnabled(false);
             DisplayMessage();
         }
     }
-
-    private void SelectTextureFromPanel()
+    
+    public bool ValidateTexture()
     {
+        if (currentTexture!= null)
+        {
+            bool returnTexture = false;
+            string message = "";
+            string assetPath = AssetDatabase.GetAssetPath(currentTexture);
+            TextureImporter importer = (TextureImporter)TextureImporter.GetAtPath(assetPath);
+            
+            if (textureTypeOptions.value == importer.textureType.ToString())
+            {
+                returnTexture = true;
+                WriteTextValidator(Color.green, "All good Test Passed");
+                
+            }
+            else
+            {
+                returnTexture = false;
+                
+            }
+            if (textureSpriteMode.value == importer.spriteImportMode.ToString())
+            {
+                returnTexture = true;
+            }
+            else if (textureSpriteMode.value == importer.spriteImportMode.ToString())
+            {
+                returnTexture = true;
+            }
+            else if (textureFilterMode.value == importer.filterMode.ToString())
+            {
+
+            }
+            /*else if (textureSpriteMode.value == importer.spriteImportMode.ToString())
+            {
+                returnTexture = true;
+                WriteTextValidator(Color.green, "Test Passed");
+            }*/
+            /*
+            if (textureSpriteMode.value == importer.spriteImportMode.ToString())
+            {
+                WriteTextValidator(Color.green, "All good Test Passed");
+            }
+            
+            if (textureFilterMode.value == importer.filterMode.ToString())
+            {
+                WriteTextValidator(Color.green, "All good Test Passed");
+            }
+            
+            if (textureTypeOptions.value == importer.textureType.ToString())
+            {
+                WriteTextValidator(Color.green, "All good Test Passed");
+            }
+            */
+            if (returnTexture)
+            {
+                WriteTextValidator(Color.green, "Test Passed");
+            }
+            else
+            {
+                WriteTextValidator(Color.red, "Test Not Passed");
+            }
+        }
         
+    }
+    
+    private void WriteTextValidator(Color _color , string _message)
+    {
+        validateTextOutput.style.color = _color;
+        validateTextOutput.text = _message;
     }
 }
 

@@ -1,22 +1,28 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
-    <engine:VisualElement style="flex-grow: 1; max-height: 19px; min-height: 15px; visibility: visible; -unity-text-align: upper-left; white-space: pre; height: auto;">
-        <editor:ToolbarMenu text="dwafwafw" tabindex="-1" style="max-width: 91px;" />
-    </engine:VisualElement>
-    <engine:Label text="Texture Optimizer" focusable="false" style="align-items: auto; justify-content: center; flex-wrap: nowrap; flex-direction: column-reverse; opacity: 1; display: flex; align-self: center; font-size: 20px;" />
+    <engine:DropdownField choices="Edit,Reset Settings,Save Setting" index="0" style="width: 60px; -unity-text-align: upper-center; align-items: stretch;" />
+    <engine:VisualElement style="flex-grow: 1; max-height: 19px; min-height: 15px; visibility: visible; -unity-text-align: upper-left; white-space: pre; height: auto;" />
+    <engine:Label text="Texture Validator" focusable="false" style="align-items: auto; justify-content: center; flex-wrap: nowrap; flex-direction: column-reverse; opacity: 1; display: flex; align-self: center; font-size: 20px;" />
     <engine:DropdownField label="Import Type:" choices="Single,Multiple Textures" index="0" name="texture-selection" />
     <editor:ObjectField label="Texture2D" type="UnityEngine.Texture2D, UnityEngine.CoreModule" name="texture-field" />
     <engine:Label text="This is Message to the user" name="message-user" style="justify-content: flex-end; align-self: center;" />
-    <engine:VisualElement name="folder-output" focusable="false" style="flex-grow: 1; opacity: 1; max-height: 15px; display: flex; visibility: visible; height: 26px; -unity-text-align: upper-left; overflow: visible; min-height: 26px; justify-content: flex-start; flex-direction: row; align-self: stretch; align-content: stretch; flex-basis: 313px; margin-top: 8px; margin-bottom: 5px;">
+    <engine:VisualElement name="folder-output" focusable="false" style="flex-grow: 1; opacity: 1; max-height: 15px; display: none; visibility: visible; height: 26px; -unity-text-align: upper-left; overflow: visible; min-height: 26px; justify-content: flex-start; flex-direction: row; align-self: stretch; align-content: stretch; flex-basis: 313px; margin-top: 8px; margin-bottom: 5px;">
         <engine:TextField placeholder-text="Assets/EditorScripting/TextureOptimizer/Resources/UI.Document/TextureCompression.uxml" name="output-text" style="width: 235px; height: auto; font-size: 10px; -unity-font-style: bold; -unity-text-align: upper-right; align-items: stretch;" />
-        <engine:Button text="FolderOutput" style="-unity-text-align: middle-center; max-width: 100px; min-width: 100px;" />
+        <engine:Button text="FolderOutput" parse-escape-sequences="false" style="-unity-text-align: middle-center; max-width: 100px; min-width: 100px; width: auto;" />
     </engine:VisualElement>
-    <engine:Button text="Load Multiple Textures" name="load-multiple-textures" style="align-items: stretch; max-width: initial; align-self: flex-start; text-overflow: clip; flex-direction: column; justify-content: flex-start; -unity-text-align: middle-center; width: 100%;" />
-    <engine:Foldout text="Texture-Settings" name="texture-settings" value="false" style="overflow: visible; visibility: visible; display: flex;" />
-    <engine:VisualElement name="settings-container" style="flex-grow: 1; overflow: visible; visibility: visible; max-height: 136px; min-height: 114px; height: auto; display: flex;">
-        <engine:DropdownField label="Texture Type" choices="Sprite2D,Default,NormalMap,EditorGUI" index="1" style="height: 17px;" />
-        <engine:DropdownField label="Sprite Mode&#10;" choices="Single,Multiple,Polygon" index="0" />
-        <engine:DropdownField label="Sprite Mode&#10;" choices="Single,Multiple,Polygon" index="0" />
-        <engine:DropdownField label="Sprite Mode&#10;" choices="Single,Multiple,Polygon" index="0" />
+    <engine:Button text="Load Multiple Textures" name="load-multiple-textures" style="align-items: stretch; max-width: initial; align-self: flex-start; text-overflow: clip; flex-direction: column; justify-content: flex-start; -unity-text-align: middle-center; width: 100%; display: none;" />
+    <engine:Foldout text="Texture-Settings" name="texture-settings" value="false" toggle-on-label-click="true" style="overflow: visible; visibility: visible; display: flex;" />
+    <engine:VisualElement name="settings-container" style="flex-grow: 1; overflow: visible; visibility: visible; max-height: 150px; min-height: 140px; height: auto; display: flex;">
+        <engine:DropdownField label="Texture Type" choices="Sprite2D,Default,NormalMap,EditorGUI" index="1" name="texture-type" style="height: 17px;" />
+        <engine:DropdownField label="Sprite Mode&#10;" choices="Single,Multiple,Polygon" index="0" name="texture-sprite-mode" />
+        <engine:DropdownField label="Filter  Mode&#10;" choices="Point(Not Filter),Bilinear,Trilinear" index="0" name="texture-filter-mode" />
+        <engine:DropdownField label="Compression&#10;" choices="None,Low Quality,Normal Quality,High Quality" index="0" name="compression-mode" />
+        <engine:Toggle label="rgb-check" name="rgb-check" />
+        <engine:IntegerField label="Pixels Per Unit" value="1" name="pixels-unit" />
+        <engine:Toggle label="Max Size" name="optimize-checker" toggle-on-label-click="true" value="true" />
     </engine:VisualElement>
-    <engine:Button text="Optimize Texture" name="modify-texture" style="border-top-width: 1px; justify-content: flex-end; align-items: center; padding-top: 3px; align-self: stretch; flex-wrap: nowrap; flex-direction: column; -unity-text-align: middle-center; margin-bottom: 3px; font-size: 18px; align-content: center; margin-top: 9px; overflow: hidden; display: flex;" />
+    <engine:Button text="Optimize Texture" name="modify-texture" parse-escape-sequences="true" selectable="false" style="border-top-width: 1px; justify-content: flex-end; align-items: center; padding-top: 3px; align-self: stretch; flex-wrap: nowrap; flex-direction: column; -unity-text-align: middle-center; margin-bottom: 3px; font-size: 18px; align-content: center; margin-top: 9px; overflow: hidden; display: flex; background-position-y: center 0;" />
+    <engine:Button text="Validate Texture" name="validate-texture" style="border-top-width: 1px; justify-content: flex-end; align-items: center; padding-top: 3px; align-self: stretch; flex-wrap: nowrap; flex-direction: column; -unity-text-align: middle-center; margin-bottom: 3px; font-size: 18px; align-content: center; margin-top: 9px; overflow: hidden; display: flex;" />
+    <engine:VisualElement style="flex-grow: 1;">
+        <engine:Label name="validate-text" style="max-height: 441px; min-height: 114px;" />
+    </engine:VisualElement>
 </engine:UXML>
