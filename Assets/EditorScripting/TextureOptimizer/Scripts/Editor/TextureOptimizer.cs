@@ -1,34 +1,36 @@
 using System;
 using System.Reflection;
 using System.IO;
-using Unity.Mathematics.Geometry;
+using SFB;
 using UnityEditor;
 using UnityEngine;
 using UnityEditor.UIElements;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using UnityEngine.WSA;
+using Application = UnityEngine.Application;
 using Button = UnityEngine.UIElements.Button;
 using Debug = UnityEngine.Debug;
 using Object = UnityEngine.Object;
-<<<<<<< HEAD
+
 using Slider = UnityEngine.UIElements.Slider;
 using Toggle = UnityEngine.UIElements.Toggle;
-=======
-
->>>>>>> c9578f0514b5d7e18a43a472bd927a3c40df7ca4
 
 /*[CustomEditor(typeof(TextureImporter),  true)]*/
 public class TextureOptimizer : EditorWindow
 {
     /*DropDowns*/
     private DropdownField selectTextureOptions;
+    private DropdownField wrapModeDropDown;
+    private DropdownField filterModeDropDown;
     
     /*SettingsDropDown*/
     private DropdownField textureTypeOptions;
     private DropdownField textureSpriteMode;
     private DropdownField textureFilterMode;
     private DropdownField compressionMode;
+    private Toggle multipleSelection;
     private Toggle rgbCheck;
     private Toggle optimizeChecker;
     private IntegerField pixelsUnit;
@@ -40,50 +42,37 @@ public class TextureOptimizer : EditorWindow
     /*Objects Fields;*/
     private ObjectField objectField;
     private ObjectField autoTextureField;
+    
     /*Textures 2d*/
     private Texture2D currentTexture;
-<<<<<<< HEAD
-=======
-    private Label validateText;
-    
-    private TextField outputText;
-    
-    private DropdownField wrapModeDropDown;
-    private DropdownField filterModeDropDown;
-    
-    private Label messageUser;
-    
-    private Label news;
-    private VisualElement autoLoadSection;
-    /*private VisualElement settingOption;*/
-    
-    private Button optimizeTextureButton;
-    private Button loadMultipleTexturesButton;
-    
->>>>>>> c9578f0514b5d7e18a43a472bd927a3c40df7ca4
     private Texture2D loadedTexture;
     
     /*Text*/
     private TextField outputText;
     private Label messageUser;
-
+    private Label validateText;
+    
 
     /*Buttons*/
     private Button optimizeTextureButton;
     private Button loadMultipleTexturesButton;
     private Button validateTextureButton;
+    private Button outputFolderbutton;
     
     /*Visual Elements*/
     private VisualElement autoLoadSection;
     private VisualElement folderOutput;
     private Foldout textureSettings;
     private VisualElement settingsContainer;
+    private bool selectMultipleTextures = false;
+    private VisualElement textOuputContainer;
+    
     
     /*ValuesElements*/
     private int currentTextureTypeOption;
-
     private LibrarySettings librarySettings;
-    
+
+    private string currentOutputPath;
     
     [MenuItem("Tools/TextureOptimizer")]
     public static void OpenEditorWindow()
@@ -120,11 +109,13 @@ public class TextureOptimizer : EditorWindow
         pixelsUnit = root.Q<IntegerField>("pixels-unit");
         optimizeChecker = root.Q<Toggle>("optimize-checker");
         validateTextureButton = root.Q<Button>("validate-texture");
-        
+        outputText = root.Q<TextField>("output-text");
+        outputFolderbutton = root.Q<Button>("output-folder-button");
         /*Buttons*/
         optimizeTextureButton = root.Q<Button>("modify-texture");
         loadMultipleTexturesButton = root.Q<Button>("load-multiple-textures");
-        
+        multipleSelection = root.Q<Toggle>("multiple-selection");
+        textOuputContainer = root.Q<VisualElement>("container-text-output");
         
         /*Assign CallBacks*/
         objectField.RegisterValueChangedCallback<Object>(evt => TextureSelected(evt));
@@ -133,6 +124,8 @@ public class TextureOptimizer : EditorWindow
         optimizeTextureButton.clicked += () => OptimizeTexture();
         loadMultipleTexturesButton.clicked += () => LoadMultipleTextures();
         validateTextureButton.clicked += () => ValidateTexture();
+        outputFolderbutton.clicked += () => AssignCurrentPath();
+        multipleSelection.RegisterValueChangedCallback(MultipleSelectionToogle);
         
         /*starting CallBacks*/
         currentTexture = null;
@@ -140,7 +133,25 @@ public class TextureOptimizer : EditorWindow
         Initializer();
         
     }
-    
+
+    private void MultipleSelectionToogle(ChangeEvent<bool> evt)
+    {
+        if (evt.newValue)
+        {
+            selectMultipleTextures = true;
+            optimizeTextureButton.SetEnabled(value: true);
+            validateTextureButton.SetEnabled(value: true);
+            objectField.style.display = DisplayStyle.None;
+        }
+        else
+        {
+            selectMultipleTextures = false;
+            optimizeTextureButton.SetEnabled(value: false);
+            validateTextureButton.SetEnabled(value: false);
+            objectField.style.display = DisplayStyle.Flex;
+        }
+    }
+
     private void FoldoutChanged(ChangeEvent<bool> evt)
     {
         if (evt.newValue != true)
@@ -156,6 +167,7 @@ public class TextureOptimizer : EditorWindow
     private void Initializer()
     {
        optimizeTextureButton.SetEnabled(false);
+       validateTextureButton.SetEnabled(false);
        loadMultipleTexturesButton.style.display = DisplayStyle.None;
        folderOutput.style.display = DisplayStyle.None;
        textureSettings.value = false;
@@ -164,34 +176,61 @@ public class TextureOptimizer : EditorWindow
        
        textureTypeOptions.index = currentTextureTypeOption;
        textureTypeOptions.index = 2;
+       outputText.value = "Assets/";
+       loadMultipleTexturesButton.SetEnabled(false);
        
     }
-    
+
+    private void createNewMessageOutput(string message)
+    {
+        Label newFoundIt = new Label(message);
+        /*newFoundIt.style.color = Color.green;*/
+        textOuputContainer.Add( newFoundIt);
+    }
     private void LoadMultipleTextures()
     {  
-        var path = EditorUtility.OpenFilePanel(                             
+        /*var path = EditorUtility.OpenFilePanel(                             
             "Save Edit Texture",                                            
             Application.dataPath + "/EditorScripting",                      
-            "png"                                                           
-        );                                                                  
-        
+            ""                                                           
+        );     */                                                             
+        // Open file with filter
+        var extensions = new [] {
+            new ExtensionFilter("Image Files", "png", "jpg", "jpeg" ),
+            /*new ExtensionFilter("Sound Files", "mp3", "wav" ),*/
+            /*new ExtensionFilter("All Files", "*" ),*/
+        };
+        // Open file async
+        String[] paths = StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, true);
+        Debug.Log(paths.Length);
         /*only look if file is selected*/
-        if (path.Length != 0)
+        if (paths.Length != 0)
         {
-            LoadTexture(path);
+            foreach (var path in paths)
+            {
+                Debug.Log(path);
+                LoadTexture(path);
+            }
+        }
+        return;
+    }
+    private void AssignCurrentPath()
+    {
+        currentOutputPath = GetSelectedFolderPath();
+        outputText.value = currentOutputPath;
+
+        if (currentOutputPath != null)
+        {
+            loadMultipleTexturesButton.SetEnabled(true);
         }
     }
-    private void OnGUI()
-    {
-        
-    }
-
+    
     private void LoadTexture(string path)
     {
         byte[] fileData = File.ReadAllBytes(path);
         string fileName = Path.GetFileName(path);
         
-        string assetPath = Path.Combine(GetSelectedFolderPath(),fileName);
+        string assetPath = Path.Combine(currentOutputPath,fileName);
         //Writing png to bytes
         File.WriteAllBytes(assetPath, fileData);
         
@@ -233,6 +272,7 @@ public class TextureOptimizer : EditorWindow
     }
     private string GetSelectedFolderPath()
     {
+        
         if (Selection.activeObject != null)
         {
             string path = AssetDatabase.GetAssetPath(Selection.activeObject);
@@ -241,8 +281,6 @@ public class TextureOptimizer : EditorWindow
             {
                 Debug.Log($"Selected Folder Path: {path}");
                 return path;
-                EditorUtility.DisplayDialog("Selected Folder Path", $"Selected Folder Path:\n{path}", "OK");
-                return path;    
             }
             else
             {
@@ -262,31 +300,40 @@ public class TextureOptimizer : EditorWindow
         Object selectedAsset = Selection.activeObject;
         autoTextureField.value = selectedAsset;
         currentTexture = selectedAsset as Texture2D;
-        
         string assetPath = AssetDatabase.GetAssetPath(currentTexture);
         
     }
     private void DisplayMessage()
     {
-        messageUser.style.display =  DisplayStyle.Flex;
-        messageUser.style.color = Color.red; 
-        messageUser.text = "Please Selected A texture";
+        if (currentTexture == null)
+        {
+            messageUser.style.display =  DisplayStyle.Flex;
+            messageUser.style.color = Color.red; 
+            messageUser.text = "Please Selected A texture";
+        }
+        else
+        {
+            messageUser.text = "";
+        }
+        
     }
     
     private void TextureSelectionOptions(ChangeEvent<string> evt)
     {
         if (selectTextureOptions.value == selectTextureOptions.choices[0] )
         {
-
+            
             objectField.style.display = DisplayStyle.Flex;
             messageUser.style.display = DisplayStyle.Flex;
-            
+            optimizeTextureButton.style.display = DisplayStyle.Flex;
+            validateTextureButton.style.display = DisplayStyle.Flex;
             loadMultipleTexturesButton.style.display = DisplayStyle.None;
             folderOutput.style.display = DisplayStyle.None;
-            
         }
         else
         {
+            optimizeTextureButton.style.display = DisplayStyle.None;
+            validateTextureButton.style.display = DisplayStyle.None;
             objectField.style.display = DisplayStyle.None;
             messageUser.style.display = DisplayStyle.None;
             
@@ -297,33 +344,45 @@ public class TextureOptimizer : EditorWindow
     /*Button-OptimizeTexture-Action => Optimize The texture ON Click*/
     private void OptimizeTexture()
     {
-        if (currentTexture == null)
+        /*if (currentTexture == null)
         {
             return;
+        }*/
+        
+        Object[] selectedObjects = Selection.objects;
+        foreach (var obj in selectedObjects)
+        {
+            string assetPath = AssetDatabase.GetAssetPath(obj);
+
+            
+            Debug.Log(assetPath);
+            
+            TextureImporter importer = (TextureImporter)TextureImporter.GetAtPath(assetPath);
+            
+            /* CustomSettings */
+            importer = librarySettings.SetTextureType(importer, textureTypeOptions.index);
+            importer = librarySettings.SetSpriteMode(importer, textureSpriteMode.index);
+            importer = librarySettings.SetFilterMode(importer, textureFilterMode.index);
+            importer = librarySettings.SetCompression(importer, compressionMode.index);
+            importer = librarySettings.SetRGB(importer, rgbCheck.value);
+            importer = librarySettings.SetPixelUnit(importer,pixelsUnit.value);
+
+            if (optimizeChecker.value)
+            {
+                importer = librarySettings.SetMaxTextureSizeOptimizer(importer); 
+            }
+            /* validate and send messages */
+            
+            createNewMessageOutput( obj.name + " imported");
+        
+            /* Save and Reimport */
+            EditorUtility.SetDirty(importer);
+            importer.SaveAndReimport(); 
+            
         }
         
         /* Loading Asset*/
-        string assetPath = AssetDatabase.GetAssetPath(currentTexture);
-        
-        TextureImporter importer = (TextureImporter)TextureImporter.GetAtPath(assetPath);
-        
-        /* CustomSettings */
-        importer = librarySettings.SetTextureType(importer, textureTypeOptions.index);
-        importer = librarySettings.SetSpriteMode(importer, textureSpriteMode.index);
-        importer = librarySettings.SetFilterMode(importer, textureFilterMode.index);
-        importer = librarySettings.SetCompression(importer, compressionMode.index);
-        importer = librarySettings.SetRGB(importer, rgbCheck.value);
-        importer = librarySettings.SetPixelUnit(importer,pixelsUnit.value);
-
-        if (optimizeChecker.value)
-        {
-            importer = librarySettings.SetMaxTextureSizeOptimizer(importer); 
-        }
-        
-        /* Save and Reimport */
-        EditorUtility.SetDirty(importer);
-        importer.SaveAndReimport(); 
-
+        /*string assetPath = AssetDatabase.GetAssetPath(currentTexture);*/
     }
     
     private void TextureSelected(ChangeEvent<Object> evt)
@@ -334,7 +393,7 @@ public class TextureOptimizer : EditorWindow
             currentTexture = evt.newValue as Texture2D;
             messageUser.style.display =  DisplayStyle.None;
             validateTextureButton.SetEnabled(true);
-            return;
+            
         }
         else
         {
@@ -374,8 +433,9 @@ public class TextureOptimizer : EditorWindow
             }
             else if (textureFilterMode.value == importer.filterMode.ToString())
             {
-
+                
             }
+            
             /*else if (textureSpriteMode.value == importer.spriteImportMode.ToString())
             {
                 returnTexture = true;
@@ -406,7 +466,8 @@ public class TextureOptimizer : EditorWindow
                 WriteTextValidator(Color.red, "Test Not Passed");
             }
         }
-        
+
+        return true;
     }
     
     private void WriteTextValidator(Color _color , string _message)

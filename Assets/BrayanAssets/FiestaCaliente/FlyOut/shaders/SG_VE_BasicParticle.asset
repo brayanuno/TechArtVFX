@@ -1,0 +1,373 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43f4de31cc4ea49b8ab005fb966d553c, type: 3}
+  m_Name: SG_VE_BasicParticle
+  m_EditorClassIdentifier: 
+  generatesWithShaderGraph: 1
+  lit: 1
+  alphaClipping: 0
+  m_PropertiesStages: 02000000020000000200000002000000
+  compilationResult:
+    codeSnippets:
+    - '#include "Packages/com.unity.shadergraph/ShaderGraphLibrary/Functions.hlsl"
+
+'
+    - "// Node: Power\r\nvoid Unity_Power_float(float A, float B, out float Out)\n{\n   
+      Out = pow(A, B);\n}\n\r\n"
+    - '// Node: Multiply
+
+      void Unity_Multiply_float4_float4(float4 A, float4
+      B, out float4 Out)
+
+      {
+
+      Out = A * B;
+
+      }
+
+      
+
+'
+    - "// Node: Saturate\r\nvoid Unity_Saturate_float(float In, out float Out)\n{\n   
+      Out = saturate(In);\n}\n\r\n"
+    - '// Node: Multiply
+
+      void Unity_Multiply_float_float(float A, float B,
+      out float Out)
+
+      {
+
+      Out = A * B;
+
+      }
+
+      
+
+'
+    - '// Property: SamplerState
+
+      SAMPLER(SamplerState_Linear_Repeat);
+
+      
+
+'
+    - 'struct SG_Input_3635807e0f4ceee4795ea489c0b52847
+
+      {
+
+'
+    - '    float3 ObjectSpaceNormal;
+
+'
+    - '    float3 ObjectSpaceTangent;
+
+'
+    - '    float3 ObjectSpacePosition;
+
+'
+    - '    half4 uv0;
+
+'
+    - '};
+
+      
+
+'
+    - 'struct SG_Output_3635807e0f4ceee4795ea489c0b52847
+
+      {'
+    - "\r\n    float3 Position_0;"
+    - "\r\n    float3 Normal_0;"
+    - "\r\n    float3 Tangent_0;"
+    - "\r\n    float3 BaseColor_1;"
+    - "\r\n    float Alpha_4;"
+    - "\r\n    float AlphaClipThreshold_7;"
+    - '
+
+      };
+
+      
+
+'
+    - "SG_Output_3635807e0f4ceee4795ea489c0b52847 SG_Evaluate_3635807e0f4ceee4795ea489c0b52847(\r\n   
+      SG_Input_3635807e0f4ceee4795ea489c0b52847 IN"
+    - ",\r\n    /* Property: Color */ float4 _Color"
+    - ",\r\n    /* Property: ColorContrast */ float _ColorContrast"
+    - ",\r\n    /* Property: OpacityContrast */ float _OpacityContrast"
+    - ",\r\n    /* Property: MainTexture */ TEXTURE2D(_MainTexture)"
+    - ')
+
+      {'
+    - "\r\n    // Node: Property\r\nfloat4 _Property_c2bc5e2fde4345ca8db11385d0e05d6a_Out_0_Vector4
+      = IsGammaSpace() ? LinearToSRGB(_Color) : _Color;\n"
+    - "\r\n    // Node: Property\r\nUnityTexture2D _Property_037f36fae55e4bfbaef490e5e812415c_Out_0_Texture2D
+      = UnityBuildTexture2DStructNoScale(_MainTexture);\n"
+    - "\r\n    // Node: Sample Texture 2D\r\nfloat4 _SampleTexture2D_bc4f310ec6344c0281287b66c1dcd730_RGBA_0_Vector4
+      = SAMPLE_TEXTURE2D(_Property_037f36fae55e4bfbaef490e5e812415c_Out_0_Texture2D.tex,
+      _Property_037f36fae55e4bfbaef490e5e812415c_Out_0_Texture2D.samplerstate, _Property_037f36fae55e4bfbaef490e5e812415c_Out_0_Texture2D.GetTransformedUV(IN.uv0.xy)
+      );\nfloat _SampleTexture2D_bc4f310ec6344c0281287b66c1dcd730_R_4_Float = _SampleTexture2D_bc4f310ec6344c0281287b66c1dcd730_RGBA_0_Vector4.r;\nfloat
+      _SampleTexture2D_bc4f310ec6344c0281287b66c1dcd730_G_5_Float = _SampleTexture2D_bc4f310ec6344c0281287b66c1dcd730_RGBA_0_Vector4.g;\nfloat
+      _SampleTexture2D_bc4f310ec6344c0281287b66c1dcd730_B_6_Float = _SampleTexture2D_bc4f310ec6344c0281287b66c1dcd730_RGBA_0_Vector4.b;\nfloat
+      _SampleTexture2D_bc4f310ec6344c0281287b66c1dcd730_A_7_Float = _SampleTexture2D_bc4f310ec6344c0281287b66c1dcd730_RGBA_0_Vector4.a;\n"
+    - "\r\n    // Node: Property\r\nfloat _Property_dd71b474f1fe48a39fbf32d78c02ce15_Out_0_Float
+      = _ColorContrast;\n"
+    - "\r\n    // Node: Power\r\nfloat _Power_96a555e81ec546478b629f446f3c296b_Out_2_Float;\nUnity_Power_float(_SampleTexture2D_bc4f310ec6344c0281287b66c1dcd730_R_4_Float,
+      _Property_dd71b474f1fe48a39fbf32d78c02ce15_Out_0_Float, _Power_96a555e81ec546478b629f446f3c296b_Out_2_Float);\n"
+    - "\r\n    // Node: Multiply\r\nfloat4 _Multiply_a9db84db60f04c08a3106f864afeaae9_Out_2_Vector4;\nUnity_Multiply_float4_float4(_Property_c2bc5e2fde4345ca8db11385d0e05d6a_Out_0_Vector4,
+      (_Power_96a555e81ec546478b629f446f3c296b_Out_2_Float.xxxx), _Multiply_a9db84db60f04c08a3106f864afeaae9_Out_2_Vector4);\n"
+    - "\r\n    // Node: Property\r\nfloat _Property_b421441475b14de98c16ef9f2b58da86_Out_0_Float
+      = _OpacityContrast;\n"
+    - "\r\n    // Node: Power\r\nfloat _Power_0344c216e7bd4d6a981ff319b41b020b_Out_2_Float;\nUnity_Power_float(_SampleTexture2D_bc4f310ec6344c0281287b66c1dcd730_R_4_Float,
+      _Property_b421441475b14de98c16ef9f2b58da86_Out_0_Float, _Power_0344c216e7bd4d6a981ff319b41b020b_Out_2_Float);\n"
+    - "\r\n    // Node: Saturate\r\nfloat _Saturate_1da877fe6ac844378b26231ba2d9934f_Out_1_Float;\nUnity_Saturate_float(_Power_0344c216e7bd4d6a981ff319b41b020b_Out_2_Float,
+      _Saturate_1da877fe6ac844378b26231ba2d9934f_Out_1_Float);\n"
+    - "\r\n    // Node: Split\r\nfloat _Split_d2b7ff909b9345b1846875f81ea4d51f_R_1_Float
+      = _Property_c2bc5e2fde4345ca8db11385d0e05d6a_Out_0_Vector4[0];\nfloat _Split_d2b7ff909b9345b1846875f81ea4d51f_G_2_Float
+      = _Property_c2bc5e2fde4345ca8db11385d0e05d6a_Out_0_Vector4[1];\nfloat _Split_d2b7ff909b9345b1846875f81ea4d51f_B_3_Float
+      = _Property_c2bc5e2fde4345ca8db11385d0e05d6a_Out_0_Vector4[2];\nfloat _Split_d2b7ff909b9345b1846875f81ea4d51f_A_4_Float
+      = _Property_c2bc5e2fde4345ca8db11385d0e05d6a_Out_0_Vector4[3];\n"
+    - "\r\n    // Node: Multiply\r\nfloat _Multiply_83b31dd3f7fc4bde9373c24fdd2e787b_Out_2_Float;\nUnity_Multiply_float_float(_Saturate_1da877fe6ac844378b26231ba2d9934f_Out_1_Float,
+      _Split_d2b7ff909b9345b1846875f81ea4d51f_A_4_Float, _Multiply_83b31dd3f7fc4bde9373c24fdd2e787b_Out_2_Float);\n"
+    - "\r\n    // Node: Saturate\r\nfloat _Saturate_e5ccc935a2a3475294468e8ffc5dd302_Out_1_Float;\nUnity_Saturate_float(_Multiply_83b31dd3f7fc4bde9373c24fdd2e787b_Out_2_Float,
+      _Saturate_e5ccc935a2a3475294468e8ffc5dd302_Out_1_Float);\n"
+    - "\r\n    // VFXMasterNode\r\n    SG_Output_3635807e0f4ceee4795ea489c0b52847
+      OUT;\r\n"
+    - '    OUT.Position_0 = IN.ObjectSpacePosition;
+
+'
+    - '    OUT.Normal_0 = IN.ObjectSpaceNormal;
+
+'
+    - '    OUT.Tangent_0 = IN.ObjectSpaceTangent;
+
+'
+    - '    OUT.BaseColor_1 = (_Multiply_a9db84db60f04c08a3106f864afeaae9_Out_2_Vector4.xyz);
+
+'
+    - '    OUT.Alpha_4 = _Saturate_e5ccc935a2a3475294468e8ffc5dd302_Out_1_Float;
+
+'
+    - '    OUT.AlphaClipThreshold_7 = float(0.5);
+
+'
+    - '    return OUT;
+
+      }
+
+'
+    sharedCodeIndices: 0000000005000000060000000b0000000c000000130000001400000019000000260000002d000000
+    outputCodeIndices:
+    - array: 090000000d00000027000000
+    - array: 070000000e00000028000000
+    - array: 080000000f00000029000000
+    - array: 01000000020000000a000000100000001500000016000000180000001a0000001b0000001c0000001d0000001e0000001f0000002a000000
+    - array: 0100000003000000040000000a000000110000001500000017000000180000001a0000001b0000001c0000002000000021000000220000002300000024000000250000002b000000
+    - array: 120000002c000000
+  portRequirements:
+  - m_RequiresNormal: 0
+    m_RequiresBitangent: 0
+    m_RequiresTangent: 0
+    m_RequiresViewDir: 0
+    m_RequiresPosition: 1
+    m_RequiresPositionPredisplacement: 0
+    m_RequiresScreenPosition: 0
+    m_RequiresNDCPosition: 0
+    m_RequiresPixelPosition: 0
+    m_RequiresVertexColor: 0
+    m_RequiresFaceSign: 0
+    m_RequiresMeshUVs: 
+    m_RequiresDepthTexture: 0
+    m_RequiresCameraOpaqueTexture: 0
+    m_RequiresTime: 0
+    m_RequiresVertexSkinning: 0
+    m_RequiresVertexID: 0
+    m_RequiresInstanceID: 0
+    m_RequiresMeshUVDerivatives: 
+  - m_RequiresNormal: 1
+    m_RequiresBitangent: 0
+    m_RequiresTangent: 0
+    m_RequiresViewDir: 0
+    m_RequiresPosition: 0
+    m_RequiresPositionPredisplacement: 0
+    m_RequiresScreenPosition: 0
+    m_RequiresNDCPosition: 0
+    m_RequiresPixelPosition: 0
+    m_RequiresVertexColor: 0
+    m_RequiresFaceSign: 0
+    m_RequiresMeshUVs: 
+    m_RequiresDepthTexture: 0
+    m_RequiresCameraOpaqueTexture: 0
+    m_RequiresTime: 0
+    m_RequiresVertexSkinning: 0
+    m_RequiresVertexID: 0
+    m_RequiresInstanceID: 0
+    m_RequiresMeshUVDerivatives: 
+  - m_RequiresNormal: 0
+    m_RequiresBitangent: 0
+    m_RequiresTangent: 1
+    m_RequiresViewDir: 0
+    m_RequiresPosition: 0
+    m_RequiresPositionPredisplacement: 0
+    m_RequiresScreenPosition: 0
+    m_RequiresNDCPosition: 0
+    m_RequiresPixelPosition: 0
+    m_RequiresVertexColor: 0
+    m_RequiresFaceSign: 0
+    m_RequiresMeshUVs: 
+    m_RequiresDepthTexture: 0
+    m_RequiresCameraOpaqueTexture: 0
+    m_RequiresTime: 0
+    m_RequiresVertexSkinning: 0
+    m_RequiresVertexID: 0
+    m_RequiresInstanceID: 0
+    m_RequiresMeshUVDerivatives: 
+  - m_RequiresNormal: 0
+    m_RequiresBitangent: 0
+    m_RequiresTangent: 0
+    m_RequiresViewDir: 0
+    m_RequiresPosition: 0
+    m_RequiresPositionPredisplacement: 0
+    m_RequiresScreenPosition: 0
+    m_RequiresNDCPosition: 0
+    m_RequiresPixelPosition: 0
+    m_RequiresVertexColor: 0
+    m_RequiresFaceSign: 0
+    m_RequiresMeshUVs: 00000000
+    m_RequiresDepthTexture: 0
+    m_RequiresCameraOpaqueTexture: 0
+    m_RequiresTime: 0
+    m_RequiresVertexSkinning: 0
+    m_RequiresVertexID: 0
+    m_RequiresInstanceID: 0
+    m_RequiresMeshUVDerivatives: 
+  - m_RequiresNormal: 0
+    m_RequiresBitangent: 0
+    m_RequiresTangent: 0
+    m_RequiresViewDir: 0
+    m_RequiresPosition: 0
+    m_RequiresPositionPredisplacement: 0
+    m_RequiresScreenPosition: 0
+    m_RequiresNDCPosition: 0
+    m_RequiresPixelPosition: 0
+    m_RequiresVertexColor: 0
+    m_RequiresFaceSign: 0
+    m_RequiresMeshUVs: 00000000
+    m_RequiresDepthTexture: 0
+    m_RequiresCameraOpaqueTexture: 0
+    m_RequiresTime: 0
+    m_RequiresVertexSkinning: 0
+    m_RequiresVertexID: 0
+    m_RequiresInstanceID: 0
+    m_RequiresMeshUVDerivatives: 
+  - m_RequiresNormal: 0
+    m_RequiresBitangent: 0
+    m_RequiresTangent: 0
+    m_RequiresViewDir: 0
+    m_RequiresPosition: 0
+    m_RequiresPositionPredisplacement: 0
+    m_RequiresScreenPosition: 0
+    m_RequiresNDCPosition: 0
+    m_RequiresPixelPosition: 0
+    m_RequiresVertexColor: 0
+    m_RequiresFaceSign: 0
+    m_RequiresMeshUVs: 
+    m_RequiresDepthTexture: 0
+    m_RequiresCameraOpaqueTexture: 0
+    m_RequiresTime: 0
+    m_RequiresVertexSkinning: 0
+    m_RequiresVertexID: 0
+    m_RequiresInstanceID: 0
+    m_RequiresMeshUVDerivatives: 
+  m_EvaluationFunctionName: SG_Evaluate_3635807e0f4ceee4795ea489c0b52847
+  m_InputStructName: SG_Input_3635807e0f4ceee4795ea489c0b52847
+  m_OutputStructName: SG_Output_3635807e0f4ceee4795ea489c0b52847
+  m_ConcretePrecision: 0
+  m_SerializedVfxAssetData:
+    typeInfo:
+      fullName: 
+    JSONnodeData: "{\n    \"m_SGVersion\": 0,\n    \"m_Type\": \"UnityEditor.ShaderGraph.Internal.ShaderGraphVfxAsset+ShaderGraphVfxAssetData\",\n   
+      \"m_ObjectId\": \"6d037cf39ed24d89a65defd1c74bf8a1\",\n    \"m_Properties\":
+      [\n        {\n            \"m_Id\": \"1c9ec571966945cd9fc719455946f533\"\n       
+      },\n        {\n            \"m_Id\": \"a3ce5097e90f4bf7a760e3a98afb803e\"\n       
+      },\n        {\n            \"m_Id\": \"ea5b3ba6b3df4d08981e2082336d6274\"\n       
+      },\n        {\n            \"m_Id\": \"8dd907d135794ad0850d9ab237b134b2\"\n       
+      }\n    ]\n}\n\n{\n    \"m_SGVersion\": 3,\n    \"m_Type\": \"UnityEditor.ShaderGraph.Internal.ColorShaderProperty\",\n   
+      \"m_ObjectId\": \"1c9ec571966945cd9fc719455946f533\",\n    \"m_Guid\": {\n       
+      \"m_GuidSerialized\": \"72c5723e-fa03-483e-8ff2-8dae14a58f51\"\n    },\n   
+      \"m_Name\": \"Color\",\n    \"m_DefaultRefNameVersion\": 1,\n    \"m_RefNameGeneratedByDisplayName\":
+      \"Color\",\n    \"m_DefaultReferenceName\": \"_Color\",\n    \"m_OverrideReferenceName\":
+      \"\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_UseCustomSlotLabel\":
+      false,\n    \"m_CustomSlotLabel\": \"\",\n    \"m_DismissedVersion\": 0,\n   
+      \"m_Precision\": 0,\n    \"overrideHLSLDeclaration\": false,\n    \"hlslDeclarationOverride\":
+      0,\n    \"m_Hidden\": false,\n    \"m_Value\": {\n        \"r\": 0.26282569766044619,\n       
+      \"g\": 0.7697597146034241,\n        \"b\": 0.8616352081298828,\n        \"a\":
+      0.0\n    },\n    \"isMainColor\": false,\n    \"m_ColorMode\": 1\n}\n\n{\n   
+      \"m_SGVersion\": 0,\n    \"m_Type\": \"UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty\",\n   
+      \"m_ObjectId\": \"8dd907d135794ad0850d9ab237b134b2\",\n    \"m_Guid\": {\n       
+      \"m_GuidSerialized\": \"58dcd276-1ec8-4410-bd6b-43abd385d467\"\n    },\n   
+      \"m_Name\": \"MainTexture\",\n    \"m_DefaultRefNameVersion\": 1,\n    \"m_RefNameGeneratedByDisplayName\":
+      \"MainTexture\",\n    \"m_DefaultReferenceName\": \"_MainTexture\",\n    \"m_OverrideReferenceName\":
+      \"\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_UseCustomSlotLabel\":
+      false,\n    \"m_CustomSlotLabel\": \"\",\n    \"m_DismissedVersion\": 0,\n   
+      \"m_Precision\": 0,\n    \"overrideHLSLDeclaration\": false,\n    \"hlslDeclarationOverride\":
+      0,\n    \"m_Hidden\": false,\n    \"m_Value\": {\n        \"m_SerializedTexture\":
+      \"{\\\"texture\\\":{\\\"fileID\\\":2800000,\\\"guid\\\":\\\"48aa47eec4ff195478b095f161aff78f\\\",\\\"type\\\":3}}\",\n       
+      \"m_Guid\": \"\"\n    },\n    \"isMainTexture\": false,\n    \"useTilingAndOffset\":
+      false,\n    \"m_Modifiable\": true,\n    \"m_DefaultType\": 0\n}\n\n{\n   
+      \"m_SGVersion\": 1,\n    \"m_Type\": \"UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty\",\n   
+      \"m_ObjectId\": \"a3ce5097e90f4bf7a760e3a98afb803e\",\n    \"m_Guid\": {\n       
+      \"m_GuidSerialized\": \"664ce809-b48e-4ebf-bd8a-433a0e809f28\"\n    },\n   
+      \"m_Name\": \"ColorContrast\",\n    \"m_DefaultRefNameVersion\": 1,\n    \"m_RefNameGeneratedByDisplayName\":
+      \"ColorContrast\",\n    \"m_DefaultReferenceName\": \"_ColorContrast\",\n   
+      \"m_OverrideReferenceName\": \"\",\n    \"m_GeneratePropertyBlock\": true,\n   
+      \"m_UseCustomSlotLabel\": false,\n    \"m_CustomSlotLabel\": \"\",\n    \"m_DismissedVersion\":
+      0,\n    \"m_Precision\": 0,\n    \"overrideHLSLDeclaration\": false,\n    \"hlslDeclarationOverride\":
+      0,\n    \"m_Hidden\": false,\n    \"m_Value\": 1.0,\n    \"m_FloatType\": 0,\n   
+      \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}\n\n{\n   
+      \"m_SGVersion\": 1,\n    \"m_Type\": \"UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty\",\n   
+      \"m_ObjectId\": \"ea5b3ba6b3df4d08981e2082336d6274\",\n    \"m_Guid\": {\n       
+      \"m_GuidSerialized\": \"51987e41-b0be-453b-b2aa-f8e9917cef82\"\n    },\n   
+      \"m_Name\": \"OpacityContrast\",\n    \"m_DefaultRefNameVersion\": 1,\n   
+      \"m_RefNameGeneratedByDisplayName\": \"OpacityContrast\",\n    \"m_DefaultReferenceName\":
+      \"_OpacityContrast\",\n    \"m_OverrideReferenceName\": \"\",\n    \"m_GeneratePropertyBlock\":
+      true,\n    \"m_UseCustomSlotLabel\": false,\n    \"m_CustomSlotLabel\": \"\",\n   
+      \"m_DismissedVersion\": 0,\n    \"m_Precision\": 0,\n    \"overrideHLSLDeclaration\":
+      false,\n    \"hlslDeclarationOverride\": 0,\n    \"m_Hidden\": false,\n   
+      \"m_Value\": 1.0,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n       
+      \"x\": 0.0,\n        \"y\": 1.0\n    }\n}\n\n"
+  outputPropertyIndices:
+  - array: 
+  - array: 
+  - array: 
+  - array: 000000000100000003000000
+  - array: 000000000200000003000000
+  - array: 
+  m_Outputs:
+  - m_Index: 0
+    m_ReferenceName: Position
+    m_Id: 0
+  - m_Index: 1
+    m_ReferenceName: Normal
+    m_Id: 0
+  - m_Index: 2
+    m_ReferenceName: Tangent
+    m_Id: 0
+  - m_Index: 3
+    m_ReferenceName: BaseColor
+    m_Id: 1
+  - m_Index: 4
+    m_ReferenceName: Alpha
+    m_Id: 4
+  - m_Index: 5
+    m_ReferenceName: AlphaClipThreshold
+    m_Id: 7
+  m_TextureInfos: []
