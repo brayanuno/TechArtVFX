@@ -178,14 +178,13 @@ public class ChannelPacker : EditorWindow
 
     private void updatePreview()
     {
-        Debug.Log(maxTextureSize.value);
         int textureSize = Int32.Parse(maxTextureSize.value);
         Texture2D finalBackgroundTexture = new Texture2D(textureSize, textureSize, TextureFormat.RGBA32, false);
         for (int y = 0; y < textureSize; y++)
         {
             for (int x = 0; x < textureSize; x++)
             {
-                Color redpixelColor= RchannelTexture.GetPixel(x, y);
+                Color redpixelColor = RchannelTexture.GetPixel(x, y);
                 /*Color greenPixelColor = GchannelTexture.GetPixel(x, y);
                 Color bluePixelColor = BchannelTexture.GetPixel(x, y);
                 Color alphaPixelColor= AchannelTexture.GetPixel(x, y);*/
@@ -195,11 +194,11 @@ public class ChannelPacker : EditorWindow
                 float blueValue = bluePixelColor.b;
                 float alphaValue = alphaPixelColor.a;*/
                 
-                finalBackgroundTexture.SetPixel(x,y,new Color(redValue, 0, 0, 1));
+                finalBackgroundTexture.SetPixel(x,y,new Color(redValue, 0, 0, 0));
             }
         }
         
-        imagePreview.style.backgroundImage = finalBackgroundTexture as Texture2D;
+        imagePreview.style.backgroundImage = finalBackgroundTexture ;
         
     }
 
