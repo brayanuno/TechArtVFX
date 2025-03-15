@@ -111,10 +111,20 @@ public class ChannelPacker : EditorWindow
         /*RChannelSelected.RegisterValueChangedCallback<string>(ChannelSelections);*/
         
         
+
+        
         textureRChannel.RegisterValueChangedCallback<Object>(evt => TextureSelected(evt,RChannelSelected.value,"R"));
         textureGChannel.RegisterValueChangedCallback<Object>(evt => TextureSelected(evt,GChannelSelected.value,"G"));
         textureBChannel.RegisterValueChangedCallback<Object>(evt => TextureSelected(evt,BChannelSelected.value,"B"));
         textureAChannel.RegisterValueChangedCallback<Object>(evt => TextureSelected(evt,AChannelSelected.value,"A"));
+        
+        RChannelSelected.RegisterValueChangedCallback<string>(evt => ChannelChanged(evt,textureRChannel.value as Texture2D,ref RchannelTexture));
+        /*GChannelSelected.RegisterValueChangedCallback<string>(evt => ChannelChanged(evt,"G"));
+        BChannelSelected.RegisterValueChangedCallback<string>(evt => ChannelChanged(evt,"B"));
+        
+        AChannelSelected.RegisterValueChangedCallback<string>(evt => ChannelChanged(evt,"A"));*/
+        
+        
         
         useRGBA.RegisterValueChangedCallback<string>(SetOutputs);
         
@@ -122,9 +132,14 @@ public class ChannelPacker : EditorWindow
         Initialize();
     }
 
-    private void ChannelSelections(ChangeEvent<string> evt)
+    private void ChannelChanged(ChangeEvent<string> evt,Texture2D channelToChange ,ref Texture2D textureChanged)
     {
+        
+        textureChanged = AssignTexture(channelToChange, evt.newValue);
+        
+        updatePreview();
         /*TextureSelected(evt,RChannelSelected.value);*/
+        /*Debug.Log("Channel "+ channelToChange +" changed to " + evt);*/
     }
     
     private void SetOutputs(ChangeEvent<string> evt)
@@ -184,6 +199,7 @@ public class ChannelPacker : EditorWindow
 
     private void TextureSelected(ChangeEvent<Object> evt, string channelToLook,string rowChannelSelected)
     {
+        
         Texture2D textureCopied =  evt.newValue as Texture2D;
         
         if (textureCopied != null)
@@ -214,7 +230,7 @@ public class ChannelPacker : EditorWindow
                     RchannelTexture = null;
                     break;
                 case "G":
-                    Debug.Log("no found");
+                    
                     GchannelTexture = null;
                     break;
                 case "B":
@@ -348,7 +364,7 @@ public class ChannelPacker : EditorWindow
                     {
                         redpixelColor = RchannelTexture.GetPixel(x, y);
                         
-                        
+                        //working on progress
                         
                         
                         
