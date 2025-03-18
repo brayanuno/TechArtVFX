@@ -118,7 +118,7 @@ public class ChannelPacker : EditorWindow
         
         /*DropDowns*/
         RChannelSelected.RegisterValueChangedCallback<string>(evt => ChannelChanged(evt,textureRChannel.value as Texture2D,ref RchannelTexture));
-        GChannelSelected.RegisterValueChangedCallback<string>(evt => ChannelChanged(evt,textureGChannel.value as Texture2D,ref GchannelTexture));
+        /*GChannelSelected.RegisterValueChangedCallback<string>(evt => ChannelChanged(evt,textureGChannel.value as Texture2D,ref GchannelTexture));*/
         
         useRGBA.RegisterValueChangedCallback<string>(SetOutputs);
         
@@ -237,7 +237,7 @@ public class ChannelPacker : EditorWindow
             }
         }
         
-        /*imagePreview.style.backgroundImage = GchannelTexture;*/
+        /*imagePreview.style.backgroundImage = RchannelTexture;*/
         UpdatePreview();
     }
 
@@ -251,7 +251,7 @@ public class ChannelPacker : EditorWindow
         switch (channelSelected)
         {
             case "R":
-                blankTexture = extractTexture(channelSelected,ref  textureCopied);
+                blankTexture = extractTexture(channelSelected,ref textureCopied);
                 break;
             case "G": 
                 blankTexture = extractTexture(channelSelected, ref textureCopied);
@@ -313,6 +313,7 @@ public class ChannelPacker : EditorWindow
                 }
             }  
         
+        
         newTextureCopied.Apply();
         return newTextureCopied;
         
@@ -331,30 +332,30 @@ public class ChannelPacker : EditorWindow
     private void UpdatePreview()
     {
         int textureSize = Int32.Parse(maxTextureSize.value);
-        
 
-        Texture2D CombinedTexture = new Texture2D(256, 256, TextureFormat.RGBA32, false);
+        Texture2D CombinedTextureR = new Texture2D(256, 256, TextureFormat.RGBA32, false);
+        Texture2D CombinedTextureRG = new Texture2D(256, 256, TextureFormat.RGBA32, false);
 
         Color redpixelColor = new Color(0, 0, 0, 1);
         Color greenPixelColor = new Color(0, 0, 0, 1);
         /*float bluePixelColor = 0f;*/
         /*Color alphaPixelColor = new Color(0, 0, 0, 1);*/
 
-        // if R only take r channel
+        // R Channel 
         if (currentType == useTypes.useR)
         {
-            Debug.Log("UpdateFEF");
-            CombinedTexture = RchannelTexture;
+            CombinedTextureR = RchannelTexture;
         }
-
+        
         if (currentType == useTypes.useRG)
         {
             Debug.Log("RG");
             
             Texture2D textureValueRed = extractTexture(RChannelSelected.value, ref RchannelTexture);
             Texture2D textureValueGreen = extractTexture(GChannelSelected.value, ref GchannelTexture);
-
-
+            
+              
+          
             for (int y = 0; y < 256; y++)
             {
                 for (int x = 0; x < 256; x++)
@@ -378,7 +379,7 @@ public class ChannelPacker : EditorWindow
                         greenPixelColor = new Color(0, 0, 0, 1);
                     }
 
-                    CombinedTexture.SetPixel(x, y, new Color(redpixelColor.r, greenPixelColor.g, 0, 1));
+                    CombinedTextureRG.SetPixel(x, y, new Color(redpixelColor.r, greenPixelColor.g, 0, 1));
 
                 }
             }
@@ -469,13 +470,14 @@ public class ChannelPacker : EditorWindow
                     }
                 }
             }*/
-            CombinedTexture.Apply();
-            if (CombinedTexture != null)
+            CombinedTextureR.Apply();
+            
+            if (CombinedTextureR != null)
             {
-                CombinedTexture.Apply();
+                CombinedTextureR.Apply();
             }
 
-            imagePreview.style.backgroundImage = CombinedTexture;
+            imagePreview.style.backgroundImage = CombinedTextureR;
 
         }
 
