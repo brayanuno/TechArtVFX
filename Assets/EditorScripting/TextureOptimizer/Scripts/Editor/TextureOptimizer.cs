@@ -239,6 +239,7 @@ public class TextureOptimizer : EditorWindow
         EditorUtility.FocusProjectWindow();
         
         Selection.activeObject = (Texture2D)AssetDatabase.LoadAssetAtPath(assetPath, typeof(Texture2D));  
+        
         Debug.Log($"File imported Successfull to: {assetPath}");
         
         return;
