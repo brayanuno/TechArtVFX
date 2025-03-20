@@ -62,7 +62,13 @@ public class ChannelPacker : EditorWindow
     
     private int widthTextureSize;
     private int heightTextureSize;
-    
+
+    private Button sortRGBA;
+    private Button sortR;
+    private Button sortG;
+    private Button sortB;
+    private Button sortA;
+    private Button sortRGB;
     private enum rgba
     {
         useR,
@@ -94,8 +100,7 @@ public class ChannelPacker : EditorWindow
     private void CreateGUI()
     {
         VisualElement root = rootVisualElement;
-        var visualTree =
-            AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(
+        var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(
                 "Assets/EditorScripting/TexturePacker/Scripts/Resources/ChannelPacker.uxml");
         VisualElement tree = visualTree.Instantiate();
         root.Add(tree);
@@ -121,6 +126,13 @@ public class ChannelPacker : EditorWindow
         maxTextureSize = root.Q<DropdownField>("size-texture");
         imagePreview = root.Q<VisualElement>("image-preview");
         saveButton = root.Q<Button>("save-button");
+        
+        sortRGBA = root.Q<Button>("sort-rgba");
+        sortRGB = root.Q<Button>("sort-rgb");
+        sortR = root.Q<Button>("sort-r");
+        sortG = root.Q<Button>("sort-g");
+        sortB = root.Q<Button>("sort-b");
+        sortA = root.Q<Button>("sort-a");
         
         
         RChannelSelected = root.Q<DropdownField>("r-channel-selection");
@@ -150,12 +162,59 @@ public class ChannelPacker : EditorWindow
         /*Buttons*/
         saveButton.clicked += () => SaveButton();
         buttonPacking.clicked += () => PackTextures();
+
+        sortRGBA.clicked += () => SortTexture(1);
+        sortRGB.clicked += () => SortTexture(2);
+        sortR.clicked += () => SortTexture(3);
+        sortG.clicked += () => SortTexture(4);
+        sortB.clicked += () => SortTexture(5);
+        sortA.clicked += () => SortTexture(6);
         
         useRGBA.RegisterValueChangedCallback<string>(SetOutputs);
         
         Initialize();
     }
 
+    private void SortTexture(int id )
+    {
+        
+        /*RGBA Channel Sort*/
+        if (id == 1)
+        {
+            imagePreview.style.backgroundImage = combinedTexture;
+        }
+        
+        /*RGB Channel Sort*/
+        if (id == 2)
+        {
+            imagePreview.style.backgroundImage = combinedTexture;
+        }
+        
+        /*G Channel Sort*/
+        if (id == 4)
+        {
+            Texture2D newTextureCopied = new Texture2D(widthTextureSize, heightTextureSize, TextureFormat.RGBA32, false);
+        
+            if (combinedTexture != null)
+            {
+                for (int y = 0; y < heightTextureSize; y++)
+                {
+                    for (int x = 0; x < widthTextureSize; x++)
+                    {
+                        float pixelColor = combinedTexture.GetPixel(x, y).g;
+                        newTextureCopied.SetPixel(x, y, new Color(0,  pixelColor , 0, 1));
+                        
+                    }
+                }
+            } 
+            newTextureCopied.Apply();
+            imagePreview.style.backgroundImage = newTextureCopied;
+        }
+    }
+    
+        
+        
+    
     private void SaveButton()
     {
         Texture2D resizedTexture;
@@ -312,12 +371,17 @@ public class ChannelPacker : EditorWindow
     
     private void TextureSelected(ChangeEvent<Object> evt, string channelToLook, string rowChannelSelected)
     {
+        
+        
         /*Texture2D textureCopied =  evt.newValue as Texture2D;*/
         
         if (evt.newValue != null)
         {
-            GetMaxTextureSize(evt.newValue as Texture2D);
-
+            Texture2D TextS = evt.newValue as Texture2D;
+            widthTextureSize = TextS.width; 
+            heightTextureSize = TextS.height;
+            /*GetMaxTextureSize(evt.newValue as Texture2D);*/
+            
             nameTexture.value = evt.newValue.name;
             /*Getting path from texture*/
             string fullPath = AssetDatabase.GetAssetPath(evt.newValue);
@@ -325,12 +389,14 @@ public class ChannelPacker : EditorWindow
             int lastSlashIndex = fullPath .LastIndexOf('/');
             path = fullPath.Substring(0, lastSlashIndex);
             path += "/" + nameTexture.value + ".png";
-
+            
+           
             switch (rowChannelSelected)
             {
                 case "R":
                     /*store the texture R */
                     RchannelTexture = ExtractTextureByChannel(evt.newValue as Texture2D, channelToLook);
+                    Debug.Log(RchannelTexture.width + "x" + RchannelTexture.height);
                     previewRChannel.style.backgroundImage = RchannelTexture;
                     break;
                 case "G":
@@ -472,8 +538,6 @@ public class ChannelPacker : EditorWindow
 
     private void PackTextures()
     {
-        int textureSize = Int32.Parse(maxTextureSize.value);
-
         
         combinedTexture  = new Texture2D(widthTextureSize, heightTextureSize, TextureFormat.RGBA32, false);
         
@@ -513,7 +577,7 @@ public class ChannelPacker : EditorWindow
         }
         
         saveButton.SetEnabled(true);
-            
+    
 
     }
 
