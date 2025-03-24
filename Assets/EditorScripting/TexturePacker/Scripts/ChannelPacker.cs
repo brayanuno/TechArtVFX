@@ -60,12 +60,15 @@ public class ChannelPacker : EditorWindow
     private int widthTextureSize;
     private int heightTextureSize;
 
-    private Button sortRGBA;
+
     private Button sortR;
     private Button sortG;
     private Button sortB;
     private Button sortA;
     private Button sortRGB;
+    
+    private DropdownField textureFormat;
+    
     private enum rgba
     {
         useR,
@@ -123,8 +126,7 @@ public class ChannelPacker : EditorWindow
         maxTextureSize = root.Q<DropdownField>("size-texture");
         imagePreview = root.Q<VisualElement>("image-preview");
         saveButton = root.Q<Button>("save-button");
-        
-        sortRGBA = root.Q<Button>("sort-rgba");
+
         sortRGB = root.Q<Button>("sort-rgb");
         sortR = root.Q<Button>("sort-r");
         sortG = root.Q<Button>("sort-g");
@@ -136,6 +138,8 @@ public class ChannelPacker : EditorWindow
         GChannelSelected = root.Q<DropdownField>("g-channel-selection");
         BChannelSelected = root.Q<DropdownField>("b-channel-selection");
         AChannelSelected = root.Q<DropdownField>("a-channel-selection");
+        
+        textureFormat = root.Q<DropdownField>("texture-format");
 
         nameTexture = root.Q<TextField>("name-texture");
         /*RChannelSelected.RegisterValueChangedCallback<string>(ChannelSelections);*/
@@ -160,7 +164,7 @@ public class ChannelPacker : EditorWindow
         saveButton.clicked += () => SaveButton();
         buttonPacking.clicked += () => PackTextures();
 
-        sortRGBA.clicked += () => SortTexture(1);
+        
         sortRGB.clicked += () => SortTexture(2);
         sortR.clicked += () => SortTexture(3);
         sortG.clicked += () => SortTexture(4);
@@ -174,7 +178,7 @@ public class ChannelPacker : EditorWindow
 
     private void EnableAllSortButtons()
     {
-        sortRGBA.SetEnabled(true);
+        sortRGB.SetEnabled(true);
         sortR.SetEnabled(true);
         sortG.SetEnabled(true);
         sortB.SetEnabled(true);
@@ -266,8 +270,8 @@ public class ChannelPacker : EditorWindow
                 {
                     for (int x = 0; x < widthTextureSize; x++)
                     {
-                        float pixelColor = combinedTexture.GetPixel(x, y).b;
-                        newTextureCopied.SetPixel(x, y, new Color(0,  0, pixelColor, 1));
+                        float pixelColor = combinedTexture.GetPixel(x, y).a;
+                        newTextureCopied.SetPixel(x, y, new Color(0,  0, 0, pixelColor));
                         
                     }
                 }
@@ -298,7 +302,8 @@ public class ChannelPacker : EditorWindow
         byte[] bytes =  blankTexture.EncodeToPNG();
         
         //Getting Name Texture and adding to path
-        path += "/" + nameTexture.value + ".png";
+        string format = "." + textureFormat.value.ToString();
+        path += "/" + nameTexture.value + format;
         System.IO.File.WriteAllBytes(path, bytes);
   
         AssetDatabase.Refresh();
@@ -587,7 +592,7 @@ public class ChannelPacker : EditorWindow
                     else if (channel == "A")
                     {
                         float alphaC = texture.GetPixel(x, y).a;
-                        newTextureCopied.SetPixel(x, y, new Color(alphaC, alphaC, alphaC, 1));
+                        newTextureCopied.SetPixel(x, y, new Color(alphaC, alphaC, alphaC,1));
                     }
                 }
             }
@@ -607,9 +612,13 @@ public class ChannelPacker : EditorWindow
 
     private void PackTextures()
     {
-        combinedTexture  = new Texture2D(widthTextureSize, heightTextureSize, TextureFormat.RGBA32, false);
         
-        
+
+        if (RchannelTexture != null && GchannelTexture != null && BchannelTexture != null && AchannelTexture != null)
+        {
+            combinedTexture  = new Texture2D(widthTextureSize, heightTextureSize, TextureFormat.RGBA32, false);
+        }
+
         // R Channel Only One Texture Preview
         if (currentType == useTypes.useR)
         {
@@ -618,36 +627,70 @@ public class ChannelPacker : EditorWindow
             {
                 combinedTexture = RchannelTexture;
             }
+            else
+            {
+                EditorUtility.DisplayDialog("Warning", "Missing Texture.", "OK");
+                return;
+                
+            }
         }
         
         if (currentType == useTypes.useRG)
         {
             /* RG ChannelCombineTexture */
-            combinedTexture = ExtractCombinedTexture();
-            
+            if (RchannelTexture != null && GchannelTexture != null)
+            {
+                combinedTexture = ExtractCombinedTexture();
+            }
+            else
+            {
+                EditorUtility.DisplayDialog("Warning", "Missing Texture.", "OK");
+                return;
+                
+            }
         }
 
         if (currentType == useTypes.useRGB)
         {
             /* RG ChannelCombineTexture */
-            combinedTexture = ExtractCombinedTexture();
+            if (RchannelTexture != null && GchannelTexture != null && BchannelTexture != null)
+            {
+                combinedTexture = ExtractCombinedTexture();
+            }
+            else
+            {
+                EditorUtility.DisplayDialog("Warning", "Missing Texture.", "OK");
+                return;
+
+            }
         }
-        
+
         if (currentType == useTypes.useRGBA)
         {
             /* RG ChannelCombineTexture */
-            combinedTexture = ExtractCombinedTexture();
+
+            if (RchannelTexture != null &&  GchannelTexture != null &&  BchannelTexture != null &&  AchannelTexture != null)
+            {
+                combinedTexture = ExtractCombinedTexture();
+            }
+            else
+            {
+                EditorUtility.DisplayDialog("Warning", "Missing Texture.", "OK");
+                return;
+
+            }
+            
         }
 
         if (combinedTexture != null)
         {
             imagePreview.style.backgroundImage = combinedTexture;
+            
         }
         
         EnableAllSortButtons();
         saveButton.SetEnabled(true);
     
-
     }
 
     private Texture2D ExtractCombinedTexture()
@@ -678,7 +721,7 @@ public class ChannelPacker : EditorWindow
                     }
                     else if (RChannelSelected.value  == "A")
                     {
-                        MergedTexture.SetPixel(x, y, new Color(pixelColor.a, 0, 0, 1));
+                        MergedTexture.SetPixel(x, y, new Color(pixelColor.r, 0, 0, 1));
                     }
                 }
             }
@@ -712,13 +755,13 @@ public class ChannelPacker : EditorWindow
                     }
                     else if (GChannelSelected.value == "A")
                     {
-                        MergedTexture.SetPixel(x,y, new Color(MergedTexture.GetPixel(x, y).r, pixelColor.a, 0, 1));
+                        MergedTexture.SetPixel(x,y, new Color(MergedTexture.GetPixel(x, y).r, pixelColor.r, 0, 1));
                     }
                 }
             }  
         }
 
-        if (BchannelTexture != null)
+        if (BchannelTexture != null )
         {
             if (currentType == useTypes.useRGB || currentType == useTypes.useRGBA)
             {
@@ -732,13 +775,13 @@ public class ChannelPacker : EditorWindow
                         if (BChannelSelected.value == "R")
                         {
                             MergedTexture.SetPixel(x, y,
-                                new Color(MergedTexture.GetPixel(x, y).r, MergedTexture.GetPixel(x, y).g, pixelColor.b,
+                                new Color(MergedTexture.GetPixel(x, y).r, MergedTexture.GetPixel(x, y).g, pixelColor.r,
                                     1));
                         }
                         else if (BChannelSelected.value == "G")
                         {
                             MergedTexture.SetPixel(x, y,
-                                new Color(MergedTexture.GetPixel(x, y).r, MergedTexture.GetPixel(x, y).g, pixelColor.b,
+                                new Color(MergedTexture.GetPixel(x, y).r, MergedTexture.GetPixel(x, y).g, pixelColor.g,
                                     1));
                         }
                         else if (BChannelSelected.value == "B")
@@ -750,7 +793,7 @@ public class ChannelPacker : EditorWindow
                         else if (BChannelSelected.value == "A")
                         {
                             MergedTexture.SetPixel(x, y,
-                                new Color(MergedTexture.GetPixel(x, y).r, MergedTexture.GetPixel(x, y).g, pixelColor.b,
+                                new Color(MergedTexture.GetPixel(x, y).r, MergedTexture.GetPixel(x, y).g, pixelColor.r,
                                     1));
                         }
                     }
@@ -791,7 +834,7 @@ public class ChannelPacker : EditorWindow
                         {
                             MergedTexture.SetPixel(x, y,
                                 new Color(MergedTexture.GetPixel(x, y).r, MergedTexture.GetPixel(x, y).g, MergedTexture.GetPixel(x, y).b,
-                                    pixelColor.a));
+                                    pixelColor.r));
                         }
                     }
                 }
