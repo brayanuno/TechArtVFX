@@ -8,7 +8,7 @@ public class HIghlightSymbolController : MonoBehaviour
     public VisualEffect pulseEffect;
     private VFXEventAttribute eventAttribute;
 
-    private bool currentStateReset = false;
+    /*private bool currentStateReset = false;*/
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

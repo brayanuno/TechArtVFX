@@ -14,7 +14,7 @@ public static class CustomHierarchyOptions
 {
     static CustomHierarchyOptions()
     {
-        EditorApplication.hierarchyWindowItemOnGUI += hierarchyWindowItemOnGui;
+        /*EditorApplication.hierarchyWindowItemOnGUI += hierarchyWindowItemOnGui;*/
     }
     
     static void hierarchyWindowItemOnGui(int id , Rect rect)
