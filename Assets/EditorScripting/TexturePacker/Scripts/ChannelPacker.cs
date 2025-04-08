@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Reflection;
 using System.IO;
-
+using System.Windows.Forms;
 using UnityEditor;
 using UnityEngine;
 using UnityEditor.UIElements;
@@ -68,14 +68,8 @@ public class ChannelPacker : EditorWindow
     private Button sortRGB;
     
     private DropdownField textureFormat;
-    
-    private enum rgba
-    {
-        useR,
-        useG,
-        UseB,
-        useA
-    }
+
+    private int nameIncreaser = 0;
 
     private enum useTypes
     {
@@ -86,9 +80,9 @@ public class ChannelPacker : EditorWindow
     }
 
     private useTypes currentType;
-    private rgba currentChannel;
 
-    [MenuItem("Tools/ChannelPacker")]
+
+    [UnityEditor.MenuItem("Tools/ChannelPacker")]
     public static void OpenEditorWindow()
     {
         ChannelPacker window = (ChannelPacker)EditorWindow.GetWindow(typeof(ChannelPacker));
@@ -181,23 +175,43 @@ public class ChannelPacker : EditorWindow
         sortRGB.SetEnabled(true);
         sortR.SetEnabled(true);
         sortG.SetEnabled(true);
+
         sortB.SetEnabled(true);
         sortA.SetEnabled(true);
-        sortRGB.SetEnabled(true);
     }
+
     private void SortTexture(int id )
     {
         
         /*RGBA Channel Sort*/
-        if (id == 1)
+        /*if (id == 1)
         {
             imagePreview.style.backgroundImage = combinedTexture;
-        }
+        }*/
         
         /*RGB Channel Sort*/
         if (id == 2)
         {
-            imagePreview.style.backgroundImage = combinedTexture;
+            Texture2D newTextureCopied = new Texture2D(widthTextureSize, heightTextureSize, TextureFormat.RGBA32, false);
+        
+            if (combinedTexture != null)
+            {
+                for (int y = 0; y < heightTextureSize; y++)
+                {
+                    for (int x = 0; x < widthTextureSize; x++)
+                    {
+                        float pixelColorR = combinedTexture.GetPixel(x, y).r;
+                        float pixelColorG = combinedTexture.GetPixel(x, y).g;
+                        float pixelColorB = combinedTexture.GetPixel(x, y).b;
+                        
+                        newTextureCopied.SetPixel(x, y, new Color(pixelColorR, pixelColorG, pixelColorB, 1));
+                        
+                    }
+                }
+            } 
+            newTextureCopied.Apply();
+            imagePreview.style.backgroundImage = newTextureCopied;
+           
         }
         /*R Channel Sort*/
         if (id == 3)
@@ -271,7 +285,8 @@ public class ChannelPacker : EditorWindow
                     for (int x = 0; x < widthTextureSize; x++)
                     {
                         float pixelColor = combinedTexture.GetPixel(x, y).a;
-                        newTextureCopied.SetPixel(x, y, new Color(0,  0, 0, pixelColor));
+                        newTextureCopied.SetPixel(x, y, new Color(pixelColor,  pixelColor, pixelColor, 
+                            1));
                         
                     }
                 }
@@ -281,13 +296,8 @@ public class ChannelPacker : EditorWindow
         }
     }
     
-        
-        
-    
     private void SaveButton()
     {
-
-        
         int widthSize = Int32.Parse(maxTextureSize.value.ToString());
         int heightSize = Int32.Parse(maxTextureSize.value.ToString());
         
@@ -298,19 +308,41 @@ public class ChannelPacker : EditorWindow
             blankTexture = ResizeTexture2D(combinedTexture,widthSize , heightSize);
             
         }
+        byte[] bytes = null;
         
-        byte[] bytes =  blankTexture.EncodeToPNG();
+        /*Sort textures Format png , jpg , tga*/
+        switch (textureFormat.value)
+        {
+            case "png": 
+                bytes =  blankTexture.EncodeToPNG();
+                break;
+            case "jpg":
+                bytes = blankTexture.EncodeToJPG();
+                break;
+            case "tga":
+                bytes = blankTexture.EncodeToTGA();
+                break;
+        }
+        
         
         //Getting Name Texture and adding to path
         string format = "." + textureFormat.value.ToString();
-        path += "/" + nameTexture.value + format;
-        System.IO.File.WriteAllBytes(path, bytes);
-  
-        AssetDatabase.Refresh();
-        EditorUtility.FocusProjectWindow();
+        string temporaryPath = path + "/" + nameTexture.value + format;
 
-        Selection.activeObject = (Texture2D)AssetDatabase.LoadAssetAtPath(path, typeof(Texture2D));  
-   
+        if (File.Exists(temporaryPath))
+        {
+            EditorUtility.DisplayDialog("Warning", "File Already Exist On the Project", "OK");
+        }
+        else
+        {
+            System.IO.File.WriteAllBytes(temporaryPath, bytes);
+  
+            AssetDatabase.Refresh();
+            EditorUtility.FocusProjectWindow();
+
+            Selection.activeObject = (Texture2D)AssetDatabase.LoadAssetAtPath(path, typeof(Texture2D));  
+        }
+        
     }
     
     Texture2D ResizeTexture2D(Texture2D texture, int width, int height)
@@ -454,15 +486,16 @@ public class ChannelPacker : EditorWindow
    
             widthTextureSize =  resizedTexture.width; 
             heightTextureSize =  resizedTexture.height;
-            /*GetMaxTextureSize(evt.newValue as Texture2D);*/
-            
-            nameTexture.value = evt.newValue.name;
+           
+            if( nameTexture.value != null )
+                nameTexture.value = evt.newValue.name + "_01" ;
             
             /*Getting path from texture*/
             string fullPath = AssetDatabase.GetAssetPath(evt.newValue);
             
             int lastSlashIndex = fullPath .LastIndexOf('/');
             path = fullPath.Substring(0, lastSlashIndex);
+            
             
             
            
@@ -550,10 +583,9 @@ public class ChannelPacker : EditorWindow
 
     private void Initialize()
     {
-        /*int textureSize = Int32.Parse(maxTextureSize.value);*/
+       
         currentType = useTypes.useR;
        
-
         /*combinedTexture = new Texture2D(widthTextureSize, heightTextureSize, TextureFormat.RGBA32, false);*/
     }
 
@@ -612,13 +644,13 @@ public class ChannelPacker : EditorWindow
 
     private void PackTextures()
     {
-        
 
         if (RchannelTexture != null && GchannelTexture != null && BchannelTexture != null && AchannelTexture != null)
         {
             combinedTexture  = new Texture2D(widthTextureSize, heightTextureSize, TextureFormat.RGBA32, false);
         }
-
+        
+        
         // R Channel Only One Texture Preview
         if (currentType == useTypes.useR)
         {
@@ -689,6 +721,8 @@ public class ChannelPacker : EditorWindow
         }
         
         EnableAllSortButtons();
+        
+        /*SortTexture(2);*/
         saveButton.SetEnabled(true);
     
     }
@@ -801,7 +835,7 @@ public class ChannelPacker : EditorWindow
             }
         }
         
-        if (BchannelTexture != null)
+        if (AchannelTexture != null)
         {
             if (currentType == useTypes.useRGBA)
             {
@@ -816,25 +850,28 @@ public class ChannelPacker : EditorWindow
                         {
                             MergedTexture.SetPixel(x, y,
                                 new Color(MergedTexture.GetPixel(x, y).r, MergedTexture.GetPixel(x, y).g, MergedTexture.GetPixel(x, y).b,
-                                    pixelColor.a));
+                                    pixelColor.r));
                         }
                         else if (AChannelSelected.value == "G")
                         {
                             MergedTexture.SetPixel(x, y,
                                 new Color(MergedTexture.GetPixel(x, y).r, MergedTexture.GetPixel(x, y).g, MergedTexture.GetPixel(x, y).b,
-                                    pixelColor.a));
+                                    pixelColor.g));
                         }
                         else if (AChannelSelected.value == "B")
                         {
                             MergedTexture.SetPixel(x, y,
                                 new Color(MergedTexture.GetPixel(x, y).r, MergedTexture.GetPixel(x, y).g, MergedTexture.GetPixel(x, y).b,
-                                    pixelColor.a));
+                                    pixelColor.b));
                         }
                         else if (AChannelSelected.value == "A")
                         {
                             MergedTexture.SetPixel(x, y,
                                 new Color(MergedTexture.GetPixel(x, y).r, MergedTexture.GetPixel(x, y).g, MergedTexture.GetPixel(x, y).b,
                                     pixelColor.r));
+                            
+                            /*float alphaC = texture.GetPixel(x, y).a;
+                            newTextureCopied.SetPixel(x, y, new Color(alphaC, alphaC, alphaC,1));*/
                         }
                     }
                 }
